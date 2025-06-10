@@ -1,0 +1,6 @@
+<h1>district list</h1>
+<% @districts.each do |district| %>
+    <%= link_to "#{district.name}", district_path(district) %>
+    <br>
+<% end %>
+<%= link_to "new district", new_district_path %>
