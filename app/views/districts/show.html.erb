@@ -1,59 +1,25 @@
-<h1><%= "#{@district.name} 's budget"%></h1>
+<h1><%= "#{@district.name} 's income" %></h1>
 <table>
     <tr>
-        <th></th>
         <th>year</th>
         <th>category</th>
-        <th>name</th>
-        <th>price</th>
-    </tr>
-    <tr>
-        <td>incomes</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <th>price</td>
+        <th>memo</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
     <% @incomes.each do |income| %>
         <tr>
-            <td></td>
             <td><%= income.year %></td>
             <td><%= income.category %></td>
-            <td></td>
             <td><%= income.price %></td>
+            <td><%= income.memo %></td>
+            <td><%= link_to "show detail", income_path(income) %>
+            <td><%= link_to "edit income", edit_income_path(income) %>
+            <td><%= link_to "add outgo", new_outgo_path %>
         </tr>
-        <% @total += income.price %>
     <% end %>
-    <tr>
-        <td>outgoes</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <% @outgoes.each do |outgo| %>
-        <tr>
-            <td></td>
-            <td><%= outgo.year %></td>
-            <td><%= outgo.category %></td>
-            <td><%= outgo.name %></td>
-            <td><%= outgo.price %></td>
-        </tr>
-        <% @total -= outgo.price %>
-    <% end %>
-    <tr>
-        <td>total</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><%= @total %></td>
-    </tr>
 </table>
+<%= link_to "add income", new_income_path %> <br>
 <%= link_to "edit district", edit_district_path(@district) %>

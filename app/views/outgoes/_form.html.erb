@@ -1,13 +1,13 @@
 <%= form_with model: model do |form| %>
-    district <br>
-    <%= form.collection_select :district_id, District.all, :id, :name, include_blank: "select something" %> <br>
+    income <br>
+    <%= form.text_field :income_id %> <br>
     year <br>
     <%= form.text_field :year %> <br>
     category <br>
     <%= form.text_field :category %> <br>
-    construction name <br>
-    <%= form.text_field :name %> <br>
     price <br>
     <%= form.text_field :price %> <br>
+    memo <br>
+    <%= form.text_field :memo %> <br>
     <%= form.submit "submit" %>
 <% end %>

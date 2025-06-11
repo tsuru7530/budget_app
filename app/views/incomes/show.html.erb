@@ -1,0 +1,55 @@
+<h1><%= "#{@income.district.name}" %></h1>
+<h2><%= "#{@income.year}(#{@income.category}) 's outgo" %></h2>
+<table>
+    <tr>
+        <th></th>
+        <th>year</th>
+        <th>category</th>
+        <th>price</th>
+        <th>memo</th>
+    </tr>
+    <tr>
+        <td>income</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><%= @income.year %></td>
+        <td><%= @income.category %></td>
+        <td><%= @income.price %></td>
+        <td><%= @income.memo %></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>outgo</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <% @outgoes.each do |outgo| %>
+        <tr>
+            <td></td>
+            <td><%= outgo.year %></td>
+            <td><%= outgo.category %></td>
+            <td><%= outgo.price %></td>
+            <td><%= outgo.memo %></td>
+        </tr>        
+    <% end %>
+    <tr>
+        <td>total</td>
+        <td></td>
+        <td></td>
+        <td><%= @total %></td>
+        <td></td>
+    </tr>
+</table>

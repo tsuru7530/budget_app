@@ -19,6 +19,6 @@ class OutgoesController < ApplicationController
 
     private
     def outgo_params
-        params.require(:outgo).permit(:district_id, :year, :category, :name, :price)
+        params.require(:outgo).permit(:income_id, :year, :category, :price, :memo)
     end
 end

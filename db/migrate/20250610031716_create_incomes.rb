@@ -5,6 +5,7 @@ class CreateIncomes < ActiveRecord::Migration[8.0]
       t.string :year
       t.string :category
       t.integer :price
+      t.string :memo
       t.timestamps
     end
   end

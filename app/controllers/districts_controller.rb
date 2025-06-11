@@ -6,8 +6,6 @@ class DistrictsController < ApplicationController
     def show
         @district = District.find(params[:id])
         @incomes = @district.incomes
-        @outgoes = @district.outgoes
-        @total = 0
     end
 
     def new
