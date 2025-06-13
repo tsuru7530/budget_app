@@ -22,8 +22,19 @@ class DistrictsController < ApplicationController
     end
 
     def update
-        District.update(district_params)
+        @district = District.find(params[:id])
+        @district.update(district_params)
         redirect_to root_path
+    end
+
+    def destroy
+        @district = District.find(params[:id])
+        @district.destroy
+        redirect_to root_path
+    end
+
+    def search
+        @districts = District.where("name LIKE ?", "%#{params[:inputword]}%")
     end
 
     private

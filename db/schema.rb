@@ -30,7 +30,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_031856) do
   create_table "outgoes", force: :cascade do |t|
     t.integer "income_id"
     t.string "year"
-    t.string "category"
     t.integer "price"
     t.string "memo"
     t.datetime "created_at", null: false

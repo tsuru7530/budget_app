@@ -1,25 +1,21 @@
-<h1><%= "#{@district.name} 's income" %></h1>
+<h1><%=link_to "#{@district.name} district 's income", edit_district_path(@district) %></h1>
 <table>
     <tr>
         <th>year</th>
         <th>category</th>
-        <th>price</td>
         <th>memo</th>
-        <th></th>
         <th></th>
         <th></th>
     </tr>
     <% @incomes.each do |income| %>
         <tr>
-            <td><%= income.year %></td>
+            <td><%= "R#{income.year}" %></td>
             <td><%= income.category %></td>
-            <td><%= income.price %></td>
             <td><%= income.memo %></td>
-            <td><%= link_to "show detail", income_path(income) %>
-            <td><%= link_to "edit income", edit_income_path(income) %>
-            <td><%= link_to "add outgo", new_outgo_path %>
+            <td><%= link_to "[detail]", income_path(income) %></td>
+            <td><%= link_to "[delete]", income_path(income), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %></td>
         </tr>
     <% end %>
 </table>
 <%= link_to "add income", new_income_path %> <br>
-<%= link_to "edit district", edit_district_path(@district) %>
+<%= link_to "district list", root_path %>

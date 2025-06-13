@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: "districts#index"
   resources :districts
-  resources :incomes
-  resources :outgoes
+  get "/search", to: "districts#search"
+  resources :incomes do
+    resources :outgoes
+  end
 end

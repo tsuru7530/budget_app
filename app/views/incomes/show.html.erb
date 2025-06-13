@@ -1,15 +1,20 @@
-<h1><%= "#{@income.district.name}" %></h1>
-<h2><%= "#{@income.year}(#{@income.category}) 's outgo" %></h2>
+<h1><%= "R#{@income.year} (#{@income.category}) 's outgo (#{@income.district.name} district)" %></h1>
 <table>
     <tr>
         <th></th>
         <th>year</th>
         <th>category</th>
-        <th>price</th>
+        <th>
+            price<br>
+            (yen)
+        </th>
         <th>memo</th>
+        <td colspan = "2"></td>
     </tr>
     <tr>
         <td>income</td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -19,18 +24,15 @@
         <td></td>
         <td><%= @income.year %></td>
         <td><%= @income.category %></td>
-        <td><%= @income.price %></td>
+        <td class="tdright"><%= @income.price.to_fs(:delimited) %></td>
         <td><%= @income.memo %></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= link_to "[edit]", edit_income_path(@income) %></td>
         <td></td>
     </tr>
     <tr>
         <td>outgo</td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -40,16 +42,31 @@
         <tr>
             <td></td>
             <td><%= outgo.year %></td>
-            <td><%= outgo.category %></td>
-            <td><%= outgo.price %></td>
+            <td></td>
+            <td class="tdright"><%= outgo.price.to_fs(:delimited) %></td>
             <td><%= outgo.memo %></td>
+            <td><%= link_to"[edit]", edit_income_outgo_path(@income.id, outgo.id) %></td>
+            <td><%= link_to "[delete]", income_outgo_path(@income.id, outgo.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></td>
         </tr>        
     <% end %>
     <tr>
         <td>total</td>
         <td></td>
         <td></td>
-        <td><%= @total %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="tdright"><%= @total.to_fs(:delimited) %></td>
+        <td></td>
+        <td></td>
         <td></td>
     </tr>
 </table>
+<%= link_to "add outgo", new_income_outgo_path(@income) %><br>
+<%= link_to "return to income list", district_path(@income.district) %>

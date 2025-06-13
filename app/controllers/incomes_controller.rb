@@ -14,8 +14,8 @@ class IncomesController < ApplicationController
 
     def create
         district_id = income_params[:district_id]
-        Income.create(income_params)
-        redirect_to district_path(district_id)
+        income = Income.create(income_params)
+        redirect_to district_path(income.district)
     end
 
     def edit
@@ -23,8 +23,16 @@ class IncomesController < ApplicationController
     end
 
     def update
-        Income.update(income_params)
-        redirect_to root_path
+        @income = Income.find(params[:id])
+        @income.update(income_params)
+        redirect_to income_path(@income)
+    end
+
+    def destroy
+        @income = Income.find(params[:id])
+        district = @income.district
+        @income.destroy
+        redirect_to district_path(district)
     end
     
     private
