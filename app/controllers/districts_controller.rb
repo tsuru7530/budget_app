@@ -13,8 +13,12 @@ class DistrictsController < ApplicationController
     end
 
     def create
-        District.create(district_params)
-        redirect_to root_path
+        @district = District.new(district_params)
+        if @district.save
+            redirect_to root_path
+        else
+            render :new, status: :unprocessable_entity 
+        end
     end
 
     def edit
@@ -23,8 +27,11 @@ class DistrictsController < ApplicationController
 
     def update
         @district = District.find(params[:id])
-        @district.update(district_params)
-        redirect_to root_path
+        if @district.update(district_params)
+            redirect_to root_path
+        else
+            render :edit, status: :unprocessable_entity 
+        end
     end
 
     def destroy

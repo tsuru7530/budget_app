@@ -14,8 +14,12 @@ class IncomesController < ApplicationController
 
     def create
         district_id = income_params[:district_id]
-        income = Income.create(income_params)
-        redirect_to district_path(income.district)
+        @income = Income.new(income_params)
+        if @income.save
+            redirect_to district_path(@income.district)
+        else
+            render :new, status: :unprocessable_entity 
+        end
     end
 
     def edit
@@ -24,8 +28,11 @@ class IncomesController < ApplicationController
 
     def update
         @income = Income.find(params[:id])
-        @income.update(income_params)
-        redirect_to income_path(@income)
+        if @income.update(income_params)
+            redirect_to income_path(@income)
+        else
+            render :edit, status: :unprocessable_entity 
+        end
     end
 
     def destroy

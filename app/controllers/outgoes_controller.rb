@@ -6,8 +6,12 @@ class OutgoesController < ApplicationController
 
     def create
         @income = Income.find(params[:income_id])
-        Outgo.create(outgo_params)
-        redirect_to income_path(@income)
+        @outgo = Outgo.new(outgo_params)
+        if @outgo.save
+            redirect_to income_path(@income)
+        else
+            render :new, status: :unprocessable_entity 
+        end
     end
 
     def edit
@@ -18,8 +22,11 @@ class OutgoesController < ApplicationController
     def update
         @income = Income.find(params[:income_id])
         @outgo = Outgo.find(params[:id])
-        @outgo.update(outgo_params)
-        redirect_to income_path(@income)
+        if @outgo.update(outgo_params)
+            redirect_to income_path(@income)
+        else
+            render :edit, status: :unprocessable_entity 
+        end
     end
 
     def destroy

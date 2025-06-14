@@ -1,5 +1,6 @@
 <h1><%= "#{@income.year} (#{@income.category}) 's outgo (#{@income.district.name})" %></h1>
 <%= form_with model: @outgo, url: income_outgoes_path do |form| %>
+    <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
     <%= form.hidden_field :income_id, value: @income.id %> <br>
     year <br>
     <%= form.text_field :year %> <br>
