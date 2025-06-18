@@ -13,6 +13,8 @@
 ActiveRecord::Schema[8.0].define(version: 2025_06_10_031856) do
   create_table "districts", force: :cascade do |t|
     t.string "name"
+    t.string "year"
+    t.string "office"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

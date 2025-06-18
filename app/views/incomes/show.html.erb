@@ -29,15 +29,17 @@
         <td><%= link_to "[edit]", edit_income_path(@income) %></td>
         <td></td>
     </tr>
-    <tr>
-        <td>outgo</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <% if @outgoes.present? %>
+        <tr>
+            <td>outgo</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    <% end %>
     <% @outgoes.each do |outgo| %>
         <tr>
             <td></td>

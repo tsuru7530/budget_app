@@ -4,7 +4,7 @@
     <%= form.collection_select :district_id, District.all, :id, :name, include_blank: "select something" %> <br>
     year <br>
     <%= form.text_field :year %> <br>
-    category <br>
+    type <br>
     <%= form.select :category, ["initial","correct"] %> <br>
     price <br>
     <%= form.text_field :price %> <br>

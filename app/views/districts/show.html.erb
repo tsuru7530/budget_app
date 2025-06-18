@@ -1,12 +1,14 @@
-<h1><%=link_to "#{@district.name} district 's income", edit_district_path(@district) %></h1>
+<h1><%=link_to "#{@district.name} district 's income (R#{@district.year} #{@district.office} office)", edit_district_path(@district) %></h1>
 <table>
-    <tr>
-        <th>year</th>
-        <th>category</th>
-        <th>memo</th>
-        <th></th>
-        <th></th>
-    </tr>
+    <% if @incomes.present? %>
+        <tr>
+            <th>year</th>
+            <th>category</th>
+            <th>memo</th>
+            <th></th>
+            <th></th>
+        </tr>
+    <% end %>
     <% @incomes.each do |income| %>
         <tr>
             <td><%= "R#{income.year}" %></td>

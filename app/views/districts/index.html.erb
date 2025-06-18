@@ -1,11 +1,15 @@
 <h1>district list</h1>
-<%= form_with url: search_path, method: :get do |form| %>
-    <%= form.text_field :inputword %>
-    <%= form.submit "search" %>
+<% if @districts.present? %>
+    <%= form_with url: search_path, method: :get do |form| %>
+        <%= form.text_field :inputword %>
+        <%= form.submit "search" %>
+    <% end %>
 <% end %>
 <br>
 <% @districts.each do |district| %>
     <%= district.name %>
+    R<%= district.year %>
+    <%= district.office %>
     <%= link_to "[detail]", district_path(district) %>
     <%= link_to "[edit]", edit_district_path(district) %>
     <%= link_to "[delete]", district_path(district), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
