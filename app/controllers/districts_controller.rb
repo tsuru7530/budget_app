@@ -41,7 +41,13 @@ class DistrictsController < ApplicationController
     end
 
     def search
-        @districts = District.where("name LIKE ?", "%#{params[:inputword]}%")
+        if params[:category] == "name"
+            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%")
+        elsif params[:category] == "year"
+            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%")
+        else
+            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%")
+        end
     end
 
     private
