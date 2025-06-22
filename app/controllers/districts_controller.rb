@@ -6,8 +6,6 @@ class DistrictsController < ApplicationController
     def show
         @district = District.find(params[:id])
         @incomes = @district.incomes
-        @outgoes = @district.outgoes
-        @total = 0
     end
 
     def new
@@ -15,8 +13,12 @@ class DistrictsController < ApplicationController
     end
 
     def create
-        District.create(district_params)
-        redirect_to root_path
+        @district = District.new(district_params)
+        if @district.save
+            redirect_to root_path
+        else
+            render :new, status: :unprocessable_entity 
+        end
     end
 
     def edit
@@ -24,12 +26,32 @@ class DistrictsController < ApplicationController
     end
 
     def update
-        District.update(district_params)
+        @district = District.find(params[:id])
+        if @district.update(district_params)
+            redirect_to root_path
+        else
+            render :edit, status: :unprocessable_entity 
+        end
+    end
+
+    def destroy
+        @district = District.find(params[:id])
+        @district.destroy
         redirect_to root_path
+    end
+
+    def search
+        if params[:category] == "name"
+            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%")
+        elsif params[:category] == "year"
+            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%")
+        else
+            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%")
+        end
     end
 
     private
     def district_params
-        params.require(:district).permit(:name)
+        params.require(:district).permit(:name, :year, :office)
     end
 end

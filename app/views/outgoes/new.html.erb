@@ -1,1 +1,16 @@
-<%= render partial: "form", locals: {model: @outgo} %>
+<h1><%= "#{@income.year} (#{@income.category}) 's outgo (#{@income.district.name})" %></h1>
+<%= form_with model: @outgo, url: income_outgoes_path do |form| %>
+    <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
+    <%= form.hidden_field :income_id, value: @income.id %> <br>
+    year <br>
+    <%= form.text_field :year %> <br>
+    price <br>
+    <%= form.text_field :price %> <br>
+    memo <br>
+    <%= form.text_field :memo %> <br>
+    <%= form.submit "submit" %>
+<% end %>
+<br>
+<%= link_to income_path(@income) do %>
+    <i class="fa-solid fa-left-long"></i>
+<% end %>

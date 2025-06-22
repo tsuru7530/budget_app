@@ -8,3 +8,20 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+
+table, tr, th, td{
+    border-style: solid;
+    border-collapse: collapse;
+    border-color: black;
+    text-align: center;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.tdright {
+    text-align: right;
+}

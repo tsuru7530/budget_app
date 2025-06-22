@@ -1,5 +1,14 @@
 <%= form_with model: model do |form| %>
+    <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
     district_name <br>
     <%= form.text_field :name %> <br>
+    year <br>
+    <%= form.text_field :year %> <br>
+    office <br>
+    <%= form.text_field :office %> <br>
     <%= form.submit "submit" %>
+<% end %>
+<br>
+<%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
 <% end %>

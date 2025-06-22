@@ -1,18 +1,4 @@
-<h1>district list</h1>
-<% if @districts.present? %>
-    <%= form_with url: search_path, method: :get do |form| %>
-        <%= form.select :category, ["name", "year", "office"] %>
-        <%= form.text_field :inputword %>
-        <%= button_tag type: "submit" do %>
-            <i class="fa-solid fa-magnifying-glass"></i>
-        <% end %>
-    <% end %>
-<% end %>
-<br>
-<%= link_to new_district_path do %>
-    <i class="fa-solid fa-plus"></i>
-<% end %> <br><br>
-
+<h1>district list (search result)</h1>
 <table>
     <tr>
         <th>district name</th>
@@ -49,3 +35,7 @@
         </tr>
     <% end %>
 </table>
+<br>
+<%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
+<% end %>

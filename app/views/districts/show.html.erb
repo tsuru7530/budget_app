@@ -1,59 +1,37 @@
-<h1><%= "#{@district.name} 's budget"%></h1>
+<h1><%=link_to "#{@district.name} district 's income (R#{@district.year} #{@district.office} office)", edit_district_path(@district) %></h1>
+<%= link_to new_income_path do %>
+    <i class="fa-solid fa-plus"></i>
+<% end %>
+<br>
+<br>
 <table>
-    <tr>
-        <th></th>
-        <th>year</th>
-        <th>category</th>
-        <th>name</th>
-        <th>price</th>
-    </tr>
-    <tr>
-        <td>incomes</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <% if @incomes.present? %>
+        <tr>
+            <th>year</th>
+            <th>category</th>
+            <th>memo</th>
+            <th colspan = "2"></th>
+        </tr>
+    <% end %>
     <% @incomes.each do |income| %>
         <tr>
-            <td></td>
-            <td><%= income.year %></td>
+            <td><%= "R#{income.year}" %></td>
             <td><%= income.category %></td>
-            <td></td>
-            <td><%= income.price %></td>
+            <td><%= income.memo %></td>
+            <td>
+                <%= link_to income_path(income) do %>
+                    <i class="fa-solid fa-circle-info"></i> 
+                <% end %>
+            </td>
+            <td>
+                <%= link_to income_path(income), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                    <i class="fa-solid fa-trash"></i>
+                <% end %>
+            </td>
         </tr>
-        <% @total += income.price %>
     <% end %>
-    <tr>
-        <td>outgoes</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <% @outgoes.each do |outgo| %>
-        <tr>
-            <td></td>
-            <td><%= outgo.year %></td>
-            <td><%= outgo.category %></td>
-            <td><%= outgo.name %></td>
-            <td><%= outgo.price %></td>
-        </tr>
-        <% @total -= outgo.price %>
-    <% end %>
-    <tr>
-        <td>total</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><%= @total %></td>
-    </tr>
 </table>
-<%= link_to "edit district", edit_district_path(@district) %>
+<br>
+<%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
+<% end %>
