@@ -1,12 +1,16 @@
 <h1><%=link_to "#{@district.name} district 's income (R#{@district.year} #{@district.office} office)", edit_district_path(@district) %></h1>
+<%= link_to new_income_path do %>
+    <i class="fa-solid fa-plus"></i>
+<% end %>
+<br>
+<br>
 <table>
     <% if @incomes.present? %>
         <tr>
             <th>year</th>
             <th>category</th>
             <th>memo</th>
-            <th></th>
-            <th></th>
+            <th colspan = "2"></th>
         </tr>
     <% end %>
     <% @incomes.each do |income| %>
@@ -14,10 +18,20 @@
             <td><%= "R#{income.year}" %></td>
             <td><%= income.category %></td>
             <td><%= income.memo %></td>
-            <td><%= link_to "[detail]", income_path(income) %></td>
-            <td><%= link_to "[delete]", income_path(income), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %></td>
+            <td>
+                <%= link_to income_path(income) do %>
+                    <i class="fa-solid fa-circle-info"></i> 
+                <% end %>
+            </td>
+            <td>
+                <%= link_to income_path(income), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                    <i class="fa-solid fa-trash"></i>
+                <% end %>
+            </td>
         </tr>
     <% end %>
 </table>
-<%= link_to "add income", new_income_path %> <br>
-<%= link_to "district list", root_path %>
+<br>
+<%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
+<% end %>

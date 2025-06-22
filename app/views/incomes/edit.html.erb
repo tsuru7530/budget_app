@@ -1,1 +1,5 @@
 <%= render partial: "form", locals: {model: @income} %>
+<br>
+<%= link_to income_path(@income) do %>
+    <i class="fa-solid fa-left-long"></i>
+<% end %>

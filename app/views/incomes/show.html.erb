@@ -1,4 +1,9 @@
 <h1><%= "R#{@income.year} (#{@income.category}) 's outgo (#{@income.district.name} district)" %></h1>
+<%= link_to new_income_outgo_path(@income) do %>
+    <i class="fa-solid fa-plus"></i>
+<% end %>
+<br>
+<br>
 <table>
     <tr>
         <th></th>
@@ -26,7 +31,11 @@
         <td><%= @income.category %></td>
         <td class="tdright"><%= @income.price.to_fs(:delimited) %></td>
         <td><%= @income.memo %></td>
-        <td><%= link_to "[edit]", edit_income_path(@income) %></td>
+        <td>
+            <%= link_to edit_income_path(@income) do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+        </td>
         <td></td>
     </tr>
     <% if @outgoes.present? %>
@@ -47,8 +56,16 @@
             <td></td>
             <td class="tdright"><%= outgo.price.to_fs(:delimited) %></td>
             <td><%= outgo.memo %></td>
-            <td><%= link_to"[edit]", edit_income_outgo_path(@income.id, outgo.id) %></td>
-            <td><%= link_to "[delete]", income_outgo_path(@income.id, outgo.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></td>
+            <td>
+                <%= link_to edit_income_outgo_path(@income.id, outgo.id) do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to income_outgo_path(@income.id, outgo.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                    <i class="fa-solid fa-trash"></i>
+                <% end %>
+            </td>
         </tr>        
     <% end %>
     <tr>
@@ -70,5 +87,7 @@
         <td></td>
     </tr>
 </table>
-<%= link_to "add outgo", new_income_outgo_path(@income) %><br>
-<%= link_to "return to income list", district_path(@income.district) %>
+<br>
+<%= link_to district_path(@income.district) do %>
+     <i class="fa-solid fa-left-long"></i>
+<% end %>
