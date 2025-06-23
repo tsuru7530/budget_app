@@ -14,12 +14,14 @@
 <% end %> <br><br>
 
 <table>
-    <tr>
-        <th>district name</th>
-        <th>year</th>
-        <th>office</th>
-        <th colspan = "3"></th>
-    </tr>
+    <% if @districts.present? %>
+        <tr>
+            <th>district name</th>
+            <th>year</th>
+            <th>office</th>
+            <th colspan = "3"></th>
+        </tr>
+    <% end %>
     <% @districts.each do |district| %>
         <tr>
             <td>

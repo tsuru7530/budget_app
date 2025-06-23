@@ -6,6 +6,8 @@
     <%= form.text_field :year %> <br>
     office <br>
     <%= form.text_field :office %> <br>
+    image <br>
+    <%= form.file_field :image, accept: "image/*" %> <br>
     <%= form.submit "submit" %>
 <% end %>
 <br>
