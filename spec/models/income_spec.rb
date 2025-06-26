@@ -4,8 +4,7 @@ RSpec.describe Income, type: :model do
   describe "#create" do
     before do
       @district = FactoryBot.create(:district)
-      @income = FactoryBot.build(:income)
-      @income.district_id = @district.id
+      @income = FactoryBot.build(:income, district_id: @district.id)
     end
     context "予算登録ができる" do
       it "year, district_id,  cagegory, price, memoが正しく設定されていれば登録できる" do
@@ -52,10 +51,20 @@ RSpec.describe Income, type: :model do
         @income.valid?
         expect(@income.errors.full_messages).to include("Price is not a number")
       end
+      it "priceが0未満だと登録できない" do
+        @income.price = -1
+        @income.valid?
+        expect(@income.errors.full_messages).to include("Price must be greater than or equal to 0")
+      end
       it "priceが11桁以上だと登録できない" do
         @income.price = 10000000000
         @income.valid?
         expect(@income.errors.full_messages).to include("Price is too long (maximum is 10 characters)")
+      end
+      it "memoが51文字以上だと登録できない" do
+        @income.memo = "a" * 51
+        @income.valid?
+        expect(@income.errors.full_messages).to include("Memo is too long (maximum is 50 characters)")
       end
     end
   end
