@@ -9,13 +9,12 @@ RSpec.describe District, type: :model do
       it "name, year, office, imageが正しく設定されていれば登録できる" do
         expect(@district).to be_valid
       end
+      it "imageが空でも登録できる" do
+        @district.image = nil
+        expect(@district).to be_valid
+      end
     end
     context "地区登録ができない" do
-      it "imageが空だと登録できない" do
-        @district.image = nil
-        @district.valid?
-        expect(@district.errors.full_messages).to include("Image can't be blank")
-      end
       it "nameが空だと登録できない" do
         @district.name = nil
         @district.valid?
