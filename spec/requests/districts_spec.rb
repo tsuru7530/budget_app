@@ -12,7 +12,7 @@ RSpec.describe "Districts", type: :request do
       it "ページタイトルが表示されている" do
         expect(response.body).to include("district list")
       end
-      it '表題が表示されていない'  do
+      it '表題(districe name, year, office)が表示されていない'  do
         expect(response.body).to_not include("district name")
         expect(response.body).to_not include("year")
         expect(response.body).to_not include("office")
@@ -26,7 +26,7 @@ RSpec.describe "Districts", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it '表題が表示されている'  do
+      it '表題(districe name, year, office)が表示されている'  do
         expect(response.body).to include("district name")
         expect(response.body).to include("year")
         expect(response.body).to include("office")
@@ -79,7 +79,7 @@ RSpec.describe "Districts", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it "入力フォームの各項目名が正しく表示されている" do
+      it "入力フォームの各項目名(districe_name, year, office, image)が正しく表示されている" do
         expect(response.body).to include("district_name")
         expect(response.body).to include("year")
         expect(response.body).to include("office")

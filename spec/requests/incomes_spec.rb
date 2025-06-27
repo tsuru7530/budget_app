@@ -15,8 +15,10 @@ RSpec.describe "Incomes", type: :request do
         expect(response.body).to include(@district.year)
         expect(response.body).to include(@district.office)
       end
-      it '表題が表示されていない'  do
-        expect(response.body).to_not include("price")
+      it '表題(year, category, memo)が表示されていない'  do
+        expect(response.body).to_not include("year")
+        expect(response.body).to_not include("category")
+        expect(response.body).to_not include("memo")
       end
     end
     context "incomeの一覧ページが正しく表示される(income登録済みの場合)" do
@@ -33,7 +35,7 @@ RSpec.describe "Incomes", type: :request do
         expect(response.body).to include(@district.year)
         expect(response.body).to include(@district.office)
       end
-      it '表題が表示されている'  do
+      it '表題(year, category, memo)が表示されている'  do
         expect(response.body).to include("year")
         expect(response.body).to include("category")
         expect(response.body).to include("memo")
@@ -50,12 +52,13 @@ RSpec.describe "Incomes", type: :request do
       before do
         @district = FactoryBot.create(:district)
         @income = FactoryBot.create(:income, district_id: @district.id)
+        @outgo = FactoryBot.create(:outgo, income_id: @income.id)
         get income_path(@income)
       end
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it '表題が表示されている'  do
+      it '表題(year, category, price, memo)が表示されている'  do
         expect(response.body).to include("year")
         expect(response.body).to include("category")
         expect(response.body).to include("price")
@@ -66,6 +69,11 @@ RSpec.describe "Incomes", type: :request do
         expect(response.body).to include(@income.category)
         expect(response.body).to include(@income.price.to_s)
         expect(response.body).to include(@income.memo)
+      end
+      it "outgoのyear, price, memoが表示されている" do
+        expect(response.body).to include(@outgo.year)
+        expect(response.body).to include(@outgo.price.to_s)
+        expect(response.body).to include(@outgo.memo)
       end
     end
   end
