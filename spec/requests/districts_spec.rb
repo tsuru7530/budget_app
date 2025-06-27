@@ -46,6 +46,12 @@ RSpec.describe "Districts", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
+      it "入力フォームの各項目名が正しく表示されている" do
+        expect(response.body).to include("district_name")
+        expect(response.body).to include("year")
+        expect(response.body).to include("office")
+        expect(response.body).to include("image")
+      end
     end
   end
   describe "#show" do
@@ -57,7 +63,7 @@ RSpec.describe "Districts", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it "作成したdistrictのname, year, bodyが正しく表示されている" do
+      it "作成したdistrictのname, year, officeが正しく表示されている" do
         expect(response.body).to include(@district.name)
         expect(response.body).to include(@district.year)
         expect(response.body).to include(@district.office)
@@ -73,7 +79,13 @@ RSpec.describe "Districts", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it "作成したdistrictのname, year, bodyが正しく表示されている" do
+      it "入力フォームの各項目名が正しく表示されている" do
+        expect(response.body).to include("district_name")
+        expect(response.body).to include("year")
+        expect(response.body).to include("office")
+        expect(response.body).to include("image")
+      end
+      it "作成したdistrictのname, year, officeが正しく表示されている" do
         expect(response.body).to include(@district.name)
         expect(response.body).to include(@district.year)
         expect(response.body).to include(@district.office)
