@@ -37,6 +37,8 @@ RSpec.describe "Districts", type: :request do
         expect(response.body).to include(@district.office)
       end
     end
+  end
+  describe "#new" do
     context "districtの新規作成ページが正しく表示される" do
       before do
         get new_district_path
@@ -45,6 +47,8 @@ RSpec.describe "Districts", type: :request do
         expect(response.status).to eq 200
       end
     end
+  end
+  describe "#show" do
     context "districtの詳細ページが正しく表示される" do
       before do
         @district = FactoryBot.create(:district)
@@ -59,6 +63,8 @@ RSpec.describe "Districts", type: :request do
         expect(response.body).to include(@district.office)
       end
     end
+  end
+  describe "#edit" do
     context "districtの更新ページが正しく表示される" do
       before do
         @district = FactoryBot.create(:district)
