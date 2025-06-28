@@ -97,6 +97,19 @@ RSpec.describe "Districts", type: :system do
       expect(current_path).to eq edit_district_path(@district) 
     end
   end
+  describe "#destroy" do
+    before do
+      @district = FactoryBot.create(:district)
+    end
+    it "正常に削除できる" do
+      visit root_path
+      find(".fa-solid.fa-trash").click
+      find("OK").click
+      expect(page).to have_content("district list")
+      expect(District.count).to eq 0
+      expect(current_path).to eq root_path
+    end
+  end
   describe "#search" do
     before do
       @district_matched = FactoryBot.create(:district, name: "hoge", year: "7", office: "hoge")
@@ -108,6 +121,7 @@ RSpec.describe "Districts", type: :system do
       select 'name', from: 'category'
       fill_in('inputword', with: "hoge")
       find(".fa-solid.fa-magnifying-glass").click
+      expect(page).to have_content("district list (search result)")
       expect(page).to have_content(@district_matched.name)
       expect(page).to have_content(@district_matched.year)
       expect(page).to have_content(@district_matched.office)
@@ -122,6 +136,7 @@ RSpec.describe "Districts", type: :system do
       select 'year', from: 'category'
       fill_in('inputword', with: "7")
       find(".fa-solid.fa-magnifying-glass").click
+      expect(page).to have_content("district list (search result)")
       expect(page).to have_content(@district_matched.name)
       expect(page).to have_content(@district_matched.year)
       expect(page).to have_content(@district_matched.office)
@@ -136,6 +151,7 @@ RSpec.describe "Districts", type: :system do
       select 'office', from: 'category'
       fill_in('inputword', with: "hoge")
       find(".fa-solid.fa-magnifying-glass").click
+      expect(page).to have_content("district list (search result)")
       expect(page).to have_content(@district_matched.name)
       expect(page).to have_content(@district_matched.year)
       expect(page).to have_content(@district_matched.office)
