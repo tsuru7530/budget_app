@@ -97,4 +97,52 @@ RSpec.describe "Districts", type: :system do
       expect(current_path).to eq edit_district_path(@district) 
     end
   end
+  describe "#search" do
+    before do
+      @district_matched = FactoryBot.create(:district, name: "hoge", year: "7", office: "hoge")
+      @district_unmatched = FactoryBot.create(:district, name: "fuga", year: "8", office: "fuga")
+    end
+    it "nameが正しく検索できる" do
+      visit root_path
+      expect(page).to have_content("district list")
+      select 'name', from: 'category'
+      fill_in('inputword', with: "hoge")
+      find(".fa-solid.fa-magnifying-glass").click
+      expect(page).to have_content(@district_matched.name)
+      expect(page).to have_content(@district_matched.year)
+      expect(page).to have_content(@district_matched.office)
+      expect(page).not_to have_content(@district_unmatched.name)
+      expect(page).not_to have_content(@district_unmatched.year)
+      expect(page).not_to have_content(@district_unmatched.office)
+      expect(current_path).to match(".*search.*")
+    end
+    it "yearが正しく検索できる" do
+      visit root_path
+      expect(page).to have_content("district list")
+      select 'year', from: 'category'
+      fill_in('inputword', with: "7")
+      find(".fa-solid.fa-magnifying-glass").click
+      expect(page).to have_content(@district_matched.name)
+      expect(page).to have_content(@district_matched.year)
+      expect(page).to have_content(@district_matched.office)
+      expect(page).not_to have_content(@district_unmatched.name)
+      expect(page).not_to have_content(@district_unmatched.year)
+      expect(page).not_to have_content(@district_unmatched.office)
+      expect(current_path).to match(".*search.*")
+    end
+    it "officeが正しく検索できる" do
+      visit root_path
+      expect(page).to have_content("district list")
+      select 'office', from: 'category'
+      fill_in('inputword', with: "hoge")
+      find(".fa-solid.fa-magnifying-glass").click
+      expect(page).to have_content(@district_matched.name)
+      expect(page).to have_content(@district_matched.year)
+      expect(page).to have_content(@district_matched.office)
+      expect(page).not_to have_content(@district_unmatched.name)
+      expect(page).not_to have_content(@district_unmatched.year)
+      expect(page).not_to have_content(@district_unmatched.office)
+      expect(current_path).to match(".*search.*")
+    end
+  end
 end
