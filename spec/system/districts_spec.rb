@@ -100,13 +100,29 @@ RSpec.describe "Districts", type: :system do
   describe "#destroy" do
     before do
       @district = FactoryBot.create(:district)
+      @income = FactoryBot.create(:income, district_id: @district.id)
+      @outgo = FactoryBot.create(:outgo, income_id: @income.id)
     end
-    it "正常に削除できる" do
+    it "正常に削除できる(turbo_confirmをaccept)" do
       visit root_path
-      find(".fa-solid.fa-trash").click
-      find("OK").click
+      page.accept_confirm do
+        find(".fa-solid.fa-trash").click
+      end
       expect(page).to have_content("district list")
       expect(District.count).to eq 0
+      expect(Income.count).to eq 0
+      expect(Outgo.count).to eq 0
+      expect(current_path).to eq root_path
+    end
+      it "正常に削除できる(turbo_confirmをdismiss)" do
+      visit root_path
+      page.dismiss_confirm do
+        find(".fa-solid.fa-trash").click
+      end
+      expect(page).to have_content("district list")
+      expect(District.count).to eq 1
+      expect(Income.count).to eq 1
+      expect(Outgo.count).to eq 1
       expect(current_path).to eq root_path
     end
   end
