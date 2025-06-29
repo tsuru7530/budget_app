@@ -78,7 +78,7 @@ RSpec.describe "Districts", type: :system do
     before do
       @district = FactoryBot.create(:district)
     end
-    it "正常に登録できる(nameのみ変更)" do
+    it "正常に更新できる(nameのみ変更)" do
       visit edit_district_path(@district)
       expect(page).to have_selector('input[name="commit"]')
       fill_in('district_name', with: "#{@district.name}changed")
@@ -87,7 +87,7 @@ RSpec.describe "Districts", type: :system do
       expect(District.count).to eq 1
       expect(current_path).to eq root_path
     end
-    it "正常に登録できない(nameが空欄)" do
+    it "正常に更新できない(nameが空欄)" do
       visit edit_district_path(@district)
       expect(page).to have_selector('input[name="commit"]')
       fill_in('district_name', with: "")
@@ -114,7 +114,7 @@ RSpec.describe "Districts", type: :system do
       expect(Outgo.count).to eq 0
       expect(current_path).to eq root_path
     end
-      it "正常に削除できる(turbo_confirmをdismiss)" do
+      it "正常に削除できない(turbo_confirmをdismiss)" do
       visit root_path
       page.dismiss_confirm do
         find(".fa-solid.fa-trash").click
