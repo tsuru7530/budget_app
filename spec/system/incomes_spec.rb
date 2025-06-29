@@ -117,7 +117,7 @@ RSpec.describe "Incomes", type: :system do
       expect(current_path).to eq district_path(@district)
     end
       it "正常に削除できない(turbo_confirmをdismiss)" do
-      visit root_path
+      visit district_path(@district)
       page.dismiss_confirm do
         find(".fa-solid.fa-trash").click
       end
