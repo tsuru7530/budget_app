@@ -1,6 +1,6 @@
 <h1>地区一覧</h1>
-(地区検索)
 <% if @districts.present? %>
+    (地区検索)
     <%= form_with url: search_path, method: :get do |form| %>
         <%= form.select :category, ["地区名", "年度", "事務所名"] %>
         <%= form.text_field :inputword %>
