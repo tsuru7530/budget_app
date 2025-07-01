@@ -1,23 +1,24 @@
-<h1><%= "R#{@income.year} (#{@income.category}) 's outgo (#{@income.district.name} district)" %></h1>
+<h1>予算情報詳細</h1>
 <%= link_to new_income_outgo_path(@income) do %>
     <i class="fa-solid fa-plus"></i>
 <% end %>
+(予算執行情報登録)
 <br>
 <br>
 <table>
     <tr>
         <th></th>
-        <th>year</th>
-        <th>category</th>
+        <th>年度</th>
+        <th>予算種別</th>
         <th>
-            price<br>
-            (yen)
+            金額<br>
+            (円)
         </th>
-        <th>memo</th>
+        <th>備考</th>
         <td colspan = "2"></td>
     </tr>
     <tr>
-        <td>income</td>
+        <td>予算</td>
         <td></td>
         <td></td>
         <td></td>
@@ -27,7 +28,7 @@
     </tr>
     <tr>
         <td></td>
-        <td><%= @income.year %></td>
+        <td>R<%= @income.year %></td>
         <td><%= @income.category %></td>
         <td class="tdright"><%= @income.price.to_fs(:delimited) %></td>
         <td><%= @income.memo %></td>
@@ -35,12 +36,14 @@
             <%= link_to edit_income_path(@income) do %>
                 <i class="fa-solid fa-pen-to-square"></i>
             <% end %>
+            <br>
+            (編集)
         </td>
         <td></td>
     </tr>
     <% if @outgoes.present? %>
         <tr>
-            <td>outgo</td>
+            <td>執行</td>
             <td></td>
             <td></td>
             <td></td>
@@ -52,7 +55,7 @@
     <% @outgoes.each do |outgo| %>
         <tr>
             <td></td>
-            <td><%= outgo.year %></td>
+            <td>R<%= outgo.year %></td>
             <td></td>
             <td class="tdright"><%= outgo.price.to_fs(:delimited) %></td>
             <td><%= outgo.memo %></td>
@@ -60,16 +63,20 @@
                 <%= link_to edit_income_outgo_path(@income.id, outgo.id) do %>
                     <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
+                <br>
+                (編集)
             </td>
             <td>
-                <%= link_to income_outgo_path(@income.id, outgo.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= link_to income_outgo_path(@income.id, outgo.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?"} do %>
                     <i class="fa-solid fa-trash"></i>
                 <% end %>
+                <br>
+                (削除)
             </td>
         </tr>        
     <% end %>
     <tr>
-        <td>total</td>
+        <td>計</td>
         <td></td>
         <td></td>
         <td></td>
@@ -91,3 +98,4 @@
 <%= link_to district_path(@income.district) do %>
      <i class="fa-solid fa-left-long"></i>
 <% end %>
+(戻る)

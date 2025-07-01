@@ -1,14 +1,14 @@
 <%= form_with model: model do |form| %>
     <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
-    district <br>
-    <%= form.collection_select :district_id, District.all, :id, :name, include_blank: "select something" %> <br>
-    year <br>
+    地区名 <br>
+    <%= form.collection_select :district_id, District.all, :id, :name, include_blank: "選択してください" %> <br>
+    年度 <br>
     <%= form.text_field :year %> <br>
-    category <br>
-    <%= form.select :category, ["initial","correct"] %> <br>
-    price <br>
+    予算種別 <br>
+    <%= form.select :category, ["現年","補正"] %> <br>
+    金額 <br>
     <%= form.text_field :price %> <br>
-    memo <br>
+    備考 <br>
     <%= form.text_field :memo %> <br>
-    <%= form.submit "submit" %>
+    <%= form.submit "登録" %>
 <% end %>

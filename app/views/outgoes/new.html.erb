@@ -1,14 +1,14 @@
-<h1><%= "#{@income.year} (#{@income.category}) 's outgo (#{@income.district.name})" %></h1>
+<h1>予算執行情報登録</h1>
 <%= form_with model: @outgo, url: income_outgoes_path do |form| %>
     <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
     <%= form.hidden_field :income_id, value: @income.id %> <br>
-    year <br>
+    年度<br>
     <%= form.text_field :year %> <br>
-    price <br>
+    金額 <br>
     <%= form.text_field :price %> <br>
-    memo <br>
+    備考 <br>
     <%= form.text_field :memo %> <br>
-    <%= form.submit "submit" %>
+    <%= form.submit "登録" %>
 <% end %>
 <br>
 <%= link_to income_path(@income) do %>

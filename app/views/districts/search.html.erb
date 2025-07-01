@@ -1,9 +1,9 @@
-<h1>district list (search result)</h1>
+<h1>地区一覧(検索結果)</h1>
 <table>
     <tr>
-        <th>district name</th>
-        <th>year</th>
-        <th>office</th>
+        <th>地区名</th>
+        <th>年度</th>
+        <th>事務所名</th>
         <th colspan = "3"></th>
     </tr>
     <% @districts.each do |district| %>
@@ -21,16 +21,22 @@
                 <%= link_to district_path(district) do %>
                     <i class="fa-solid fa-circle-info"></i>        
                 <% end %>
+                <br>
+                (詳細)
             </td>
             <td>
                 <%= link_to edit_district_path(district) do %>
                     <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
+                <br>
+                (編集)
             </td>
             <td>
-                <%= link_to district_path(district), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= link_to district_path(district), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} do %>
                     <i class="fa-solid fa-trash"></i>
                 <% end %>
+                <br>
+                (削除)
             </td>
         </tr>
     <% end %>
@@ -39,3 +45,4 @@
 <%= link_to root_path do %>
     <i class="fa-solid fa-left-long"></i>
 <% end %>
+(戻る)
