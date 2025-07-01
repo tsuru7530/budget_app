@@ -1,14 +1,14 @@
 <%= form_with model: model do |form| %>
     <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
-    district_name <br>
+    地区名 <br>
     <%= form.text_field :name %> <br>
-    year <br>
+    年度 <br>
     <%= form.text_field :year %> <br>
-    office <br>
+    事務所名 <br>
     <%= form.text_field :office %> <br>
-    image <br>
+    画像 <br>
     <%= form.file_field :image, accept: "image/*" %> <br>
-    <%= form.submit "submit" %>
+    <%= form.submit "地区登録" %>
 <% end %>
 <br>
 <%= link_to root_path do %>

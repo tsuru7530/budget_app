@@ -7,13 +7,13 @@ RSpec.describe "Outgoes", type: :system do
       @income = FactoryBot.create(:income, district_id: @district.id)
       @outgo = FactoryBot.build(:outgo, income_id: @income.id)
     end
-    it "incomes#showからリンクをクリックすると遷移し、outgo作成ページが表示される" do
+    it "incomes#showからリンクをクリックすると遷移し、予算執行新規作成ページが表示される" do
       visit income_path(@income)
       expect(page).to have_content(@income.year)
       expect(page).to have_content(@income.category)
       expect(page).to have_content(@income.price.to_fs(:delimited))
       find(".fa-solid.fa-plus").click
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報登録")
       expect(current_path).to eq new_income_outgo_path(@income)
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe "Outgoes", type: :system do
     end
     it "正常に登録できる" do
       visit new_income_outgo_path(@income)
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報登録")
       fill_in('outgo[year]', with: @outgo.year)
       fill_in('outgo[price]', with: @outgo.price)
       fill_in('outgo[memo]', with: @outgo.memo)
@@ -37,13 +37,13 @@ RSpec.describe "Outgoes", type: :system do
       expect(Outgo.count).to eq 1
       expect(current_path).to eq income_path(@income)
     end
-    it "正常に登録できない(yearが空欄)" do
+    it "正常に登録できない(年度が空欄)" do
       visit new_income_outgo_path(@income)
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報登録")
       fill_in('outgo[price]', with: @outgo.price)
       fill_in('outgo[memo]', with: @outgo.memo)
       find('input[name="commit"]').click
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報登録")
       expect(Outgo.count).to eq 0
       expect(current_path).to eq new_income_outgo_path(@income)
     end
@@ -54,11 +54,11 @@ RSpec.describe "Outgoes", type: :system do
       @income = FactoryBot.create(:income, district_id: @district.id)
       @outgo = FactoryBot.create(:outgo, income_id: @income.id)
     end
-    it "incomes#showからリンクをクリックすると遷移し、outgo編集ページが表示される" do
+    it "incomes#showからリンクをクリックすると遷移し、予算執行情報編集ページが表示される" do
       visit income_path(@income)
       expect(page).to have_selector(".fa-solid.fa-pen-to-square")
       find_all(".fa-solid.fa-pen-to-square")[1].click
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報編集")
       expect(current_path).to eq edit_income_outgo_path(@income, @outgo)
     end
   end
@@ -70,18 +70,18 @@ RSpec.describe "Outgoes", type: :system do
     end
     it "正しく更新される" do
       visit edit_income_outgo_path(@income, @outgo)
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報編集")
       fill_in('outgo[memo]', with: "hogehoge")
       find('input[name="commit"]').click
-      expect(page).to have_selector(".fa-solid.fa-pen-to-square")
+      expect(page).to have_content("予算情報詳細")
       expect(current_path).to eq income_path(@income)
     end
     it "正しく更新されない(memoが空欄)" do
       visit edit_income_outgo_path(@income, @outgo)
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報編集")
       fill_in('outgo[memo]', with: "")
       find('input[name="commit"]').click
-      expect(page).to have_selector('input[name="commit"]')
+      expect(page).to have_content("予算執行情報編集")
       expect(current_path).to eq edit_income_outgo_path(@income, @outgo)
     end
   end

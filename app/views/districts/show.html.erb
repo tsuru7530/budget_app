@@ -1,35 +1,49 @@
-<h1><%=link_to "#{@district.name} district 's income (R#{@district.year} #{@district.office} office)", edit_district_path(@district) %></h1>
+<h1>地区情報詳細</h1>
+<div>
+    <b>
+        (
+        R<%= @district.year %> 
+        <%= @district.name %>地区
+         <%= @district.office %>事務所
+        )
+    </b>
+</div>
 <% if @district.image.attached? %>
     <%= image_tag @district.image, size: "150x150" %><br>
 <% end %>   
 <%= link_to new_income_path do %>
     <i class="fa-solid fa-plus"></i>
 <% end %>
+(予算登録)
 <br>
 <br>
 <table>
     <% if @incomes.present? %>
         <tr>
-            <th>year</th>
-            <th>category</th>
-            <th>memo</th>
+            <th>年度</th>
+            <th>予算種別</th>
+            <th>備考</th>
             <th colspan = "2"></th>
         </tr>
     <% end %>
     <% @incomes.each do |income| %>
         <tr>
-            <td><%= "R#{income.year}" %></td>
+            <td>R<%= income.year %></td>
             <td><%= income.category %></td>
             <td><%= income.memo %></td>
             <td>
                 <%= link_to income_path(income) do %>
                     <i class="fa-solid fa-circle-info"></i> 
                 <% end %>
+                <br>
+                (詳細)
             </td>
             <td>
-                <%= link_to income_path(income), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= link_to income_path(income), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} do %>
                     <i class="fa-solid fa-trash"></i>
                 <% end %>
+                <br>
+                (削除)
             </td>
         </tr>
     <% end %>
@@ -38,3 +52,4 @@
 <%= link_to root_path do %>
     <i class="fa-solid fa-left-long"></i>
 <% end %>
+(戻る)

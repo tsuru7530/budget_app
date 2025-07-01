@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    attributes:
+      district:
+        name: 地区名
+        year: 年度
+        office: 事務所名
+      income:
+        district_id: 地区名
+        year: 年度
+        category: 予算種別
+        price: 金額
+        memo: 備考
+      outgo:
+        income_id: 予算
+        year: 年度
+        price: 金額
+        memo: 備考

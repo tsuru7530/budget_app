@@ -1,7 +1,8 @@
-<h1>district list</h1>
+<h1>地区一覧</h1>
 <% if @districts.present? %>
+    (地区検索)
     <%= form_with url: search_path, method: :get do |form| %>
-        <%= form.select :category, ["name", "year", "office"] %>
+        <%= form.select :category, ["地区名", "年度", "事務所名"] %>
         <%= form.text_field :inputword %>
         <%= button_tag type: "submit" do %>
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -11,14 +12,15 @@
 <br>
 <%= link_to new_district_path do %>
     <i class="fa-solid fa-plus"></i>
-<% end %> <br><br>
+<% end %> 
+(地区登録)<br><br>
 
 <table>
     <% if @districts.present? %>
         <tr>
-            <th>district name</th>
-            <th>year</th>
-            <th>office</th>
+            <th>地区名</th>
+            <th>年度</th>
+            <th>事務所名</th>
             <th colspan = "3"></th>
         </tr>
     <% end %>
@@ -37,16 +39,22 @@
                 <%= link_to district_path(district) do %>
                     <i class="fa-solid fa-circle-info"></i>        
                 <% end %>
+                <br>
+                (詳細)
             </td>
             <td>
                 <%= link_to edit_district_path(district) do %>
                     <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
+                <br>
+                (編集)
             </td>
             <td>
-                <%= link_to district_path(district), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= link_to district_path(district), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか?"} do %>
                     <i class="fa-solid fa-trash"></i>
                 <% end %>
+                <br>
+                (削除)
             </td>
         </tr>
     <% end %>
