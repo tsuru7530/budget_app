@@ -1,4 +1,13 @@
 <h1>地区情報詳細</h1>
+<div>
+    <b>
+        (
+        R<%= @district.year %> 
+        <%= @district.name %>地区
+         <%= @district.office %>事務所
+        )
+    </b>
+</div>
 <% if @district.image.attached? %>
     <%= image_tag @district.image, size: "150x150" %><br>
 <% end %>   

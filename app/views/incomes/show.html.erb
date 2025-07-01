@@ -1,4 +1,14 @@
 <h1>予算情報詳細</h1>
+<div>
+    <b>
+        (
+        R<%= @income.district.year %> 
+        <%= @income.district.name %>地区
+         <%= @income.district.office %>事務所
+        )
+    </b>
+</div>
+<br>
 <%= link_to new_income_outgo_path(@income) do %>
     <i class="fa-solid fa-plus"></i>
 <% end %>

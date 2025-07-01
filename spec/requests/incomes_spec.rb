@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Incomes", type: :request do
   describe "#index" do
-    context "incomeの一覧ページが正しく表示される(income未登録の場合)" do
+    context "予算の一覧ページが正しく表示される(予算未登録の場合)" do
       before do
         @district = FactoryBot.create(:district)
         get district_path(@district)
@@ -10,18 +10,18 @@ RSpec.describe "Incomes", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it "districtのname, year, officeが表示されている" do
+      it "地区の地区名, 年度, 事務所名が表示されている" do
         expect(response.body).to include(@district.name)
         expect(response.body).to include(@district.year)
         expect(response.body).to include(@district.office)
       end
-      it '表題(year, category, memo)が表示されていない'  do
-        expect(response.body).to_not include("year")
-        expect(response.body).to_not include("category")
-        expect(response.body).to_not include("memo")
+      it '表題(年度, 予算種別, 備考)が表示されていない'  do
+        expect(response.body).to_not include("年度")
+        expect(response.body).to_not include("予算種別")
+        expect(response.body).to_not include("備考")
       end
     end
-    context "incomeの一覧ページが正しく表示される(income登録済みの場合)" do
+    context "予算の一覧ページが正しく表示される(予算登録済みの場合)" do
       before do
         @district = FactoryBot.create(:district)
         @income = FactoryBot.create(:income, district_id: @district.id)
@@ -30,17 +30,17 @@ RSpec.describe "Incomes", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it "districtのname, year, officeが表示されている" do
+      it "地区の地区名, 年度, 事務所名が表示されている" do
         expect(response.body).to include(@district.name)
         expect(response.body).to include(@district.year)
         expect(response.body).to include(@district.office)
       end
-      it '表題(year, category, memo)が表示されている'  do
-        expect(response.body).to include("year")
-        expect(response.body).to include("category")
-        expect(response.body).to include("memo")
+      it '表題(年度, 予算種別, 備考)が表示されている'  do
+        expect(response.body).to include("年度")
+        expect(response.body).to include("予算種別")
+        expect(response.body).to include("備考")
       end
-      it "incomeのyear, category, memoが表示されている" do
+      it "予算の年度, 予算種別, 備考が表示されている" do
         expect(response.body).to include(@income.year)
         expect(response.body).to include(@income.category)
         expect(response.body).to include(@income.memo)
@@ -48,7 +48,7 @@ RSpec.describe "Incomes", type: :request do
     end
   end
   describe "#show" do
-    context "incomeの詳細ページが正しく表示される" do
+    context "予算の詳細ページが正しく表示される" do
       before do
         @district = FactoryBot.create(:district)
         @income = FactoryBot.create(:income, district_id: @district.id)
@@ -58,27 +58,27 @@ RSpec.describe "Incomes", type: :request do
       it "リクエストは200 OKとなる" do
         expect(response.status).to eq 200
       end
-      it '表題(year, category, price, memo)が表示されている'  do
-        expect(response.body).to include("year")
-        expect(response.body).to include("category")
-        expect(response.body).to include("price")
-        expect(response.body).to include("memo")
+      it '表題(年度, 予算種別, 金額, 備考)が表示されている'  do
+        expect(response.body).to include("年度")
+        expect(response.body).to include("予算種別")
+        expect(response.body).to include("金額")
+        expect(response.body).to include("備考")
       end
-      it "incomeのyear, category, price, memoが表示されている" do
+      it "予算の年度, 予算種別, 金額, 備考が表示されている" do
         expect(response.body).to include(@income.year)
         expect(response.body).to include(@income.category)
-        expect(response.body).to include(@income.price.to_s)
+        expect(response.body).to include(@income.price.to_fs(:delimited))
         expect(response.body).to include(@income.memo)
       end
-      it "outgoのyear, price, memoが表示されている" do
+      it "執行の年度, 金額, 備考が表示されている" do
         expect(response.body).to include(@outgo.year)
-        expect(response.body).to include(@outgo.price.to_s)
+        expect(response.body).to include(@outgo.price.to_fs(:delimited))
         expect(response.body).to include(@outgo.memo)
       end
     end
   end
   describe "#new" do
-    context "incomeの新規作成ページが正しく表示される" do
+    context "予算の新規作成ページが正しく表示される" do
       before do 
         get new_income_path
       end
@@ -86,16 +86,16 @@ RSpec.describe "Incomes", type: :request do
         expect(response.status).to eq 200
       end
       it "入力フォームの各項目名が正しく表示されている" do
-        expect(response.body).to include("district")
-        expect(response.body).to include("year")
-        expect(response.body).to include("category")
-        expect(response.body).to include("price")
-        expect(response.body).to include("memo")
+        expect(response.body).to include("地区名")
+        expect(response.body).to include("年度")
+        expect(response.body).to include("予算種別")
+        expect(response.body).to include("金額")
+        expect(response.body).to include("備考")
       end
     end
   end
   describe "#edit" do
-    context "incomeの編集ページが正しく表示される" do
+    context "予算の編集ページが正しく表示される" do
       before do
         @district = FactoryBot.create(:district)
         @income = FactoryBot.create(:income, district_id: @district.id)
@@ -105,13 +105,13 @@ RSpec.describe "Incomes", type: :request do
         expect(response.status).to eq 200
       end
       it "入力フォームの各項目名が正しく表示されている" do
-        expect(response.body).to include("district")
-        expect(response.body).to include("year")
-        expect(response.body).to include("category")
-        expect(response.body).to include("price")
-        expect(response.body).to include("memo")
+        expect(response.body).to include("地区名")
+        expect(response.body).to include("年度")
+        expect(response.body).to include("予算種別")
+        expect(response.body).to include("金額")
+        expect(response.body).to include("備考")
       end
-      it "incomeのyear, category, price, memoが正しく表示されている" do
+      it "予算の年度, 予算種別, 金額, 備考が正しく表示されている" do
         expect(response.body).to include(@income.year)
         expect(response.body).to include(@income.category)
         expect(response.body).to include(@income.price.to_s)
