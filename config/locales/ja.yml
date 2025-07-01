@@ -4,7 +4,7 @@ ja:
       district:
         name: 地区名
         year: 年度
-        office: 事務所
+        office: 事務所名
       income:
         year: 年度
         category: 予算種別
