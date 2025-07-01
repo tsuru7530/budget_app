@@ -12,6 +12,7 @@ ja:
         price: 金額
         memo: 備考
       outgo:
+        income_id: 予算
         year: 年度
         price: 金額
         memo: 備考
