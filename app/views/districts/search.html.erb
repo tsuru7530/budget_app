@@ -23,28 +23,17 @@
                 <%= link_to district_path(district) do %>
                     <i class="fa-solid fa-circle-info"></i>        
                 <% end %>
-                <br>
-                (詳細)
             </td>
             <td>
                 <%= link_to edit_district_path(district) do %>
                     <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
-                <br>
-                (編集)
             </td>
             <td>
                 <%= link_to district_path(district), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} do %>
                     <i class="fa-solid fa-trash"></i>
                 <% end %>
-                <br>
-                (削除)
             </td>
         </tr>
     <% end %>
 </table>
-<br>
-<%= link_to root_path do %>
-    <i class="fa-solid fa-left-long"></i>
-<% end %>
-(戻る)

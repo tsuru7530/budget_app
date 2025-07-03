@@ -1,24 +1,44 @@
-# README
+# 地区別予算管理アプリ
+## 説明
+地区別に予算を管理するアプリです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## URL
+https://budget-app-0eh2.onrender.com
 
-Things you may want to cover:
+## 動機
+現在の職場で地区ごとにExcelで予算を管理ており、シートやファイル数が多く面倒なので、一括で管理できるアプリを作りたいと考えた。
 
-* Ruby version
+## 内容
+* 地区情報
+  * 登録
+  * 編集
+  * 削除
+  * 検索
+* 地区別予算情報
+  * 登録
+  * 編集
+  * 削除
+* 予算別執行情報
+  * 登録
+  * 編集
+  * 削除
 
-* System dependencies
+## 技術
+* 言語
+  * Ruby on Rails
+  * HTML
+  * CSS
+* 機能
+  * 画像投稿(active storage)
+  * デプロイ(render)
+  * 本番環境での画像保存(amazon s3)
+  * テスト(rspec)
+    * モデル単体テスト
+    * コントローラテスト
+    * 結合テスト
 
-* Configuration
+## 補足
+* renderに定期的にリクエストを送らないとサーバが止まります
+* renderの無料期間が終了したらアクセスできなくなります(ごめんなさい)
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

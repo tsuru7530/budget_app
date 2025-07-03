@@ -28,7 +28,7 @@
         <td colspan = "2"></td>
     </tr>
     <tr>
-        <td>予算</td>
+        <td>予算額</td>
         <td></td>
         <td></td>
         <td></td>
@@ -46,14 +46,12 @@
             <%= link_to edit_income_path(@income) do %>
                 <i class="fa-solid fa-pen-to-square"></i>
             <% end %>
-            <br>
-            (編集)
         </td>
         <td></td>
     </tr>
     <% if @outgoes.present? %>
         <tr>
-            <td>執行</td>
+            <td>執行額</td>
             <td></td>
             <td></td>
             <td></td>
@@ -73,20 +71,16 @@
                 <%= link_to edit_income_outgo_path(@income.id, outgo.id) do %>
                     <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
-                <br>
-                (編集)
             </td>
             <td>
                 <%= link_to income_outgo_path(@income.id, outgo.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか?"} do %>
                     <i class="fa-solid fa-trash"></i>
                 <% end %>
-                <br>
-                (削除)
             </td>
         </tr>        
     <% end %>
     <tr>
-        <td>計</td>
+        <td>残額</td>
         <td></td>
         <td></td>
         <td></td>
@@ -104,8 +98,3 @@
         <td></td>
     </tr>
 </table>
-<br>
-<%= link_to district_path(@income.district) do %>
-     <i class="fa-solid fa-left-long"></i>
-<% end %>
-(戻る)
