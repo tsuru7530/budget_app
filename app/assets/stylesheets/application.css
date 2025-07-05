@@ -25,3 +25,8 @@ a {
 .tdright {
     text-align: right;
 }
+
+#map {
+  height: 300px;
+  width: 300px;
+}
