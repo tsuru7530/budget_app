@@ -43,6 +43,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_04_115121) do
     t.string "name"
     t.string "year"
     t.string "office"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,7 +61,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_04_115121) do
 
   create_table "maps", force: :cascade do |t|
     t.integer "district_id", null: false
-    t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", null: false

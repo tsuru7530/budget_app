@@ -10,10 +10,13 @@
     <%= form.file_field :image, accept: "image/*" %> <br>
     場所
     <div id="map"></div>
+    <%= form.hidden_field :latitude, id: "hidden_latitude" %>
+    <%= form.hidden_field :longitude, id: "hidden_longitude" %>
     <%= form.submit "地区登録" %>
 <% end %>
 <script>
     let map
+    let marker
     function initMap(){
         geocoder = new google.maps.Geocoder()
             map = new google.maps.Map(document.getElementById('map'), {
@@ -25,6 +28,13 @@
             position:  {lat: 40.7828, lng:-73.9653},
             map: map
         });
+        let latitude = marker.position.lat()
+        let longitude = marker.position.lng()
+        let hidden_latitude = document.getElementById("hidden_latitude")
+        let hidden_longitude = document.getElementById("hidden_longitude")
+        hidden_latitude.value = latitude
+        hidden_longitude.value = longitude
     }
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
