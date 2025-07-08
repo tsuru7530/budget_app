@@ -17,24 +17,32 @@
 <script>
     let map
     let marker
+    let dbLat
+    let dbLng
     function initMap(){
+        if (gon !== undefined) {
+            dbLat = gon.latitude;
+            dbLng = gon.longitude;
+        };
         geocoder = new google.maps.Geocoder()
+            console.log(dbLat)
             map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 40.7828, lng:-73.9653},
+            center: {lat: dbLat, lng: dbLng},
             zoom: 12,
         });
-
         marker = new google.maps.Marker({
-            position:  {lat: 40.7828, lng:-73.9653},
-            map: map
+            position: {lat: dbLat, lng: dbLng},
+            map: map,
+            draggable: true,
         });
-        let latitude = marker.position.lat()
-        let longitude = marker.position.lng()
-        let hidden_latitude = document.getElementById("hidden_latitude")
-        let hidden_longitude = document.getElementById("hidden_longitude")
-        hidden_latitude.value = latitude
-        hidden_longitude.value = longitude
-    }
-
+        google.maps.event.addListener(marker, 'dragend', function(e){
+            let hiddenLat = document.getElementById("hidden_latitude")
+            let hiddenLng = document.getElementById("hidden_longitude")
+            let latitude = e.latLng.lat()
+            let longitude = e.latLng.lng()
+            hiddenLat.value = latitude
+            hiddenLng.value = longitude
+        });
+    };
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>

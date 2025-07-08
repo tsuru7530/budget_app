@@ -23,6 +23,8 @@ class DistrictsController < ApplicationController
 
     def edit
         @district = District.find(params[:id])
+        gon.latitude = @district.latitude
+        gon.longitude = @district.longitude
     end
 
     def update
