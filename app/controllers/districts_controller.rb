@@ -23,6 +23,8 @@ class DistrictsController < ApplicationController
 
     def edit
         @district = District.find(params[:id])
+        gon.latitude = @district.latitude
+        gon.longitude = @district.longitude
     end
 
     def update
@@ -52,6 +54,6 @@ class DistrictsController < ApplicationController
 
     private
     def district_params
-        params.require(:district).permit(:name, :year, :office, :image)
+        params.require(:district).permit(:name, :year, :office, :image, :latitude, :longitude)
     end
 end
