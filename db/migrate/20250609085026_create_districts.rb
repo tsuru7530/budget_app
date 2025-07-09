@@ -4,8 +4,6 @@ class CreateDistricts < ActiveRecord::Migration[8.0]
       t.string :name
       t.string :year
       t.string :office
-      t.float :latitude
-      t.float :longitude
       t.timestamps
     end
   end
