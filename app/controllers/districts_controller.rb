@@ -10,6 +10,10 @@ class DistrictsController < ApplicationController
 
     def new
         @district = District.new
+        @district.latitude = 35.681382
+        @district.longitude = 139.766084
+        gon.latitude = @district.latitude
+        gon.longitude = @district.longitude
     end
 
     def create

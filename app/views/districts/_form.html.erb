@@ -20,12 +20,9 @@
     let dbLat
     let dbLng
     function initMap(){
-        if (gon !== undefined) {
-            dbLat = gon.latitude;
-            dbLng = gon.longitude;
-        };
+        dbLat = gon.latitude;
+        dbLng = gon.longitude;
         geocoder = new google.maps.Geocoder()
-            console.log(dbLat)
             map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: dbLat, lng: dbLng},
             zoom: 12,
