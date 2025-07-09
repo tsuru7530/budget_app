@@ -5,6 +5,8 @@ class DistrictsController < ApplicationController
 
     def show
         @district = District.find(params[:id])
+        gon.latitude = @district.latitude
+        gon.longitude = @district.longitude
         @incomes = @district.incomes
     end
 

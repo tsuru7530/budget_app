@@ -7,10 +7,13 @@
          <%= @district.office %>事務所
         )
     </b>
-</div>
-<% if @district.image.attached? %>
-    <%= image_tag @district.image, size: "150x150" %><br>
-<% end %>   
+</div><br>
+<div class="imgmaparea">
+    <div id="map" style="width: 300px; height: 150px;"></div>
+    <% if @district.image.attached? %>
+        <%= image_tag @district.image, size: "150x150" %>
+    <% end %>
+</div><br>
 <%= link_to new_income_path do %>
     <i class="fa-solid fa-plus"></i>
 <% end %>
@@ -44,3 +47,23 @@
         </tr>
     <% end %>
 </table>
+<script>
+    let map
+    let marker
+    let dbLat
+    let dbLng
+    function initMap(){
+        dbLat = gon.latitude;
+        dbLng = gon.longitude;
+        geocoder = new google.maps.Geocoder()
+            map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: dbLat, lng: dbLng},
+            zoom: 12,
+        });
+        marker = new google.maps.Marker({
+            position: {lat: dbLat, lng: dbLng},
+            map: map,
+        });
+    };
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>

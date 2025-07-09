@@ -30,3 +30,9 @@ a {
   height: 300px;
   width: 300px;
 }
+
+.imgmaparea {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
