@@ -75,7 +75,4 @@ end
 group :production do
   gem "pg"
   gem "aws-sdk-s3", require: false
-  gem 'geocoder'
-  gem 'gon'
-  gem 'gmaps4rails'
 end
