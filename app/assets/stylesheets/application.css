@@ -36,3 +36,7 @@ a {
     justify-content: flex-start;
     align-items: center;
 }
+
+.input_hidden {
+    display: none;
+}

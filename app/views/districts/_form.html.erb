@@ -6,10 +6,18 @@
     <%= form.text_field :year %> <br>
     事務所名 <br>
     <%= form.text_field :office %> <br>
-    画像 <br>
-    <%= form.file_field :image, accept: "image/*" %> <br>
-    <div id= "image_preview"></div>
+    画像
+    <label>
+    <i class="fa-solid fa-image"></i>
+    <%= form.file_field :image, accept: "image/*" , class: "input_hidden" %> <br>
+    </label>
     <%= form.check_box(:image_delete, checked_value: "1", unchecked_value: "0") %>
+    画像を保存しない 
+    <div id= "image_preview">
+        <% if @district.image.attached? %>
+            <%= image_tag @district.image, size: "150x150" %>
+        <% end %>
+    </div><br>
     場所
     <div id="map"></div>
     <%= form.hidden_field :latitude, id: "hidden_latitude" %>
@@ -54,8 +62,15 @@
         }
         let img = document.createElement('img');
         img.setAttribute('src', blob);
-        img.setAttribute('style', 'width: 150px; height: 150px;')
+        img.setAttribute('style', 'width: 150px; height:')
         imagePreview.appendChild(img);
+    })
+    let imgcheckbox = document.getElementById('district_image_delete')
+    imgcheckbox.addEventListener('change', () =>{
+        if (imgcheckbox.checked === true ) {
+            let img = document.querySelector('img')
+            img.remove()
+        }
     })
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
