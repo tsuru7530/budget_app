@@ -47,6 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_035059) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+    t.integer "image_delete"
   end
 
   create_table "incomes", force: :cascade do |t|

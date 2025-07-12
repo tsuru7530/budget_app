@@ -4,4 +4,5 @@ class District < ApplicationRecord
     validates :name, presence: true, length: {maximum: 50}
     validates :year, presence: true, numericality:{only_integer: true, greater_than_or_equal_to: 7}
     validates :office, presence: true, length: {maximum: 50}
+    validates :image_delete, presence: true
 end

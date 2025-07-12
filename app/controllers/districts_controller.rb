@@ -20,6 +20,9 @@ class DistrictsController < ApplicationController
 
     def create
         @district = District.new(district_params)
+        if @district.image_delete == 1
+            @district.image.purge unless @district.image.nil?
+        end
         if @district.save
             redirect_to root_path
         else
@@ -60,6 +63,6 @@ class DistrictsController < ApplicationController
 
     private
     def district_params
-        params.require(:district).permit(:name, :year, :office, :image, :latitude, :longitude)
+        params.require(:district).permit(:name, :year, :office, :image, :image_delete, :latitude, :longitude)
     end
 end

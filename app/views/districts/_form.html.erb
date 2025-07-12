@@ -8,6 +8,8 @@
     <%= form.text_field :office %> <br>
     画像 <br>
     <%= form.file_field :image, accept: "image/*" %> <br>
+    <div id= "image_preview"></div>
+    <%= form.check_box(:image_delete, checked_value: "1", unchecked_value: "0") %>
     場所
     <div id="map"></div>
     <%= form.hidden_field :latitude, id: "hidden_latitude" %>
@@ -41,5 +43,19 @@
             hiddenLng.value = longitude
         });
     };
+    let imageInput = document.getElementById("district_image")
+    let imagePreview  = document.getElementById("image_preview")
+    imageInput.addEventListener('change', (e) => {
+        let file = e.target.files[0];
+        let blob = window.URL.createObjectURL(file);
+        if (document.querySelector('img')) {
+            let img = document.querySelector('img')
+            img.remove()
+        }
+        let img = document.createElement('img');
+        img.setAttribute('src', blob);
+        img.setAttribute('style', 'width: 150px; height: 150px;')
+        imagePreview.appendChild(img);
+    })
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
