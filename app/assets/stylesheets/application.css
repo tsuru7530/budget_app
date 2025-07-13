@@ -40,3 +40,7 @@ a {
 .input_hidden {
     display: none;
 }
+
+#map {
+    margin-top: 10px;
+}

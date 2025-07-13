@@ -63,6 +63,6 @@ class DistrictsController < ApplicationController
 
     private
     def district_params
-        params.require(:district).permit(:name, :year, :office, :image, :image_delete, :latitude, :longitude)
+        params.require(:district).permit(:name, :year, :office, :image, :image_delete, :latitude, :longitude, :address)
     end
 end
