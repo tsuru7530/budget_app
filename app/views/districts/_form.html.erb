@@ -19,8 +19,8 @@
         <% end %>
     </div>
     場所 <br>
-    検索
-    <%= form.text_field :address %>
+    <input type="text" id="input_address">
+    <button id="search_address">検索</button>
     <div id="map"></div>
     <%= form.hidden_field :latitude, id: "hidden_latitude" %>
     <%= form.hidden_field :longitude, id: "hidden_longitude" %>
@@ -52,8 +52,31 @@
             hiddenLat.value = latitude
             hiddenLng.value = longitude
         });
-        let inputAddress = document.getElementById('district_address')
-        inputAddress.addEventListener('keyup', searchAddress())
+        let searchBtn = document.getElementById('search_address')
+        searchBtn.addEventListener('click', (e) => {
+            console.log("OK")
+            e.preventDefault()
+            inputStr = document.getElementById('input_address').value
+            geocoder.geocode({'address': inputStr}, function(results, status){
+                if (status == 'OK') {
+                    latitude = results[0].geometry.location.lat()
+                    longitude = results[0].geometry.location.lng()
+                    document.getElementById("hidden_latitude").value = latitude
+                    document.getElementById("hidden_longitude").value = longitude
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: latitude, lng: longitude},
+                    zoom: 12,
+                });
+                marker = new google.maps.Marker({
+                    position: {lat: latitude, lng: longitude},
+                    map: map,
+                    draggable: true,
+                });
+                } else {
+                    alert('該当の住所が見つかりませんでした')
+                }
+            })
+        })
     };
     let imageInput = document.getElementById("district_image")
     let imagePreview  = document.getElementById("image_preview")
@@ -78,18 +101,5 @@
             img.remove()
         }
     })
-    function searchAddress(){
-        inputStr = document.getElementById('district_address').value
-        geocoder.geocode({'address': inputStr}, function(results, status){
-            if (status == 'OK') {
-                latitude = results[0].geometry.location.lat()
-                longitude = results[0].geometry.location.lng()
-                document.getElementById("hidden_latitude").value = latitude
-                document.getElementById("hidden_longitude").value = longitude
-            } else {
-                alert('該当の住所が見つかりませんでした')
-            }
-        })
-    }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

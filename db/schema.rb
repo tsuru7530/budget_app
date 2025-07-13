@@ -48,7 +48,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_035059) do
     t.float "latitude"
     t.float "longitude"
     t.integer "image_delete"
-    t.string "address"
   end
 
   create_table "incomes", force: :cascade do |t|
