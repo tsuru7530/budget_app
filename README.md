@@ -28,17 +28,16 @@ https://budget-app-0eh2.onrender.com
   * Ruby on Rails
   * HTML
   * CSS
+  * JavaScript
 * 機能
   * 画像投稿(active storage)
+  * 画像のプレビュー
+  * GoogleMapの位置情報保存(GoogleMapsApi)
   * デプロイ(render)
   * 本番環境での画像保存(amazon s3)
   * テスト(rspec)
     * モデル単体テスト
     * コントローラテスト
     * 結合テスト
-
-## 補足
-* renderに定期的にリクエストを送らないとサーバが止まります
-* renderの無料期間が終了したらアクセスできなくなります(ごめんなさい)
 
 
