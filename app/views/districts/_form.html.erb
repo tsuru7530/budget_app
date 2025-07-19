@@ -11,7 +11,7 @@
         <i class="fa-solid fa-image"></i>
         <%= form.file_field :image, accept: "image/*" , class: "input_hidden" %> <br>
     </label>
-    <%= form.check_box(:image_delete, checked_value: "1", unchecked_value: "0") %>
+    <%= form.check_box(:image_delete)%>
     画像を保存しない 
     <div id= "image_preview">
         <% if @district.image.attached? %>
