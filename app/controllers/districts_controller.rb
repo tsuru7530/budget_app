@@ -38,6 +38,9 @@ class DistrictsController < ApplicationController
 
     def update
         @district = District.find(params[:id])
+        if @district.image_delete == 1
+            @district.image.purge unless @district.image.nil?
+        end
         if @district.update(district_params)
             redirect_to root_path
         else
