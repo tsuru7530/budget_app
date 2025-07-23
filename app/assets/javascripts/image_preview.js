@@ -21,8 +21,16 @@ imgcheckbox = document.getElementById('district_image_delete')
 imgcheckbox.addEventListener('change', () =>{
 
     let img = document.querySelector('#preview_img')
+    let imgIcon = document.getElementsByClassName('fa-solid fa-image')[0]
     imgcheckbox.value = imgcheckbox.checked === true ? 1 : 0
-    if (imgcheckbox.checked === true && img) {
-        img.remove()
+    if (imgcheckbox.checked === true) {
+        if (img) {img.remove()}
+        if (imgIcon) {imgIcon.remove()}
+    } else if (imgcheckbox.checked === false) {
+        imgIcon = document.getElementsByClassName('fa-solid fa-image')[0]
+        if (!imgIcon) {
+          let insertHtml =  `<i class="fa-solid fa-image"></i>`
+          imageInput.insertAdjacentHTML('beforebegin', insertHtml)
+        }
     }
 })
