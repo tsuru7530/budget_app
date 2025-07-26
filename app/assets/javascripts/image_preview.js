@@ -22,8 +22,10 @@ imgcheckbox.addEventListener('change', () =>{
 
     let img = document.querySelector('#preview_img')
     let imgIcon = document.getElementsByClassName('fa-solid fa-image')[0]
+    imageInput = document.getElementById("district_image")
     imgcheckbox.value = imgcheckbox.checked === true ? 1 : 0
     if (imgcheckbox.checked === true) {
+        imageInput.value = ""
         if (img) {img.remove()}
         if (imgIcon) {imgIcon.remove()}
     } else if (imgcheckbox.checked === false) {
