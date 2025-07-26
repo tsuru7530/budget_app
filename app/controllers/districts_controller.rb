@@ -1,10 +1,12 @@
 class DistrictsController < ApplicationController
     def index
-        @districts = District.all
+        @districts = District.all.page(params[:page])
     end
 
     def show
         @district = District.find(params[:id])
+        gon.latitude = @district.latitude
+        gon.longitude = @district.longitude
         @incomes = @district.incomes
     end
 
@@ -18,6 +20,9 @@ class DistrictsController < ApplicationController
 
     def create
         @district = District.new(district_params)
+        if @district.image_delete == 1
+            @district.image.purge unless @district.image.nil?
+        end
         if @district.save
             redirect_to root_path
         else
@@ -33,6 +38,9 @@ class DistrictsController < ApplicationController
 
     def update
         @district = District.find(params[:id])
+        if @district.image_delete == 1
+            @district.image.purge unless @district.image.nil?
+        end
         if @district.update(district_params)
             redirect_to root_path
         else
@@ -48,16 +56,16 @@ class DistrictsController < ApplicationController
 
     def search
         if params[:category] == "地区名"
-            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%")
+            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%").page(params[:page])
         elsif params[:category] == "年度"
-            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%")
+            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%").page(params[:page])
         else
-            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%")
+            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%").page(params[:page])
         end
     end
 
     private
     def district_params
-        params.require(:district).permit(:name, :year, :office, :image, :latitude, :longitude)
+        params.require(:district).permit(:name, :year, :office, :image, :image_delete, :latitude, :longitude)
     end
 end

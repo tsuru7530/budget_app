@@ -7,8 +7,20 @@
     事務所名 <br>
     <%= form.text_field :office %> <br>
     画像 <br>
-    <%= form.file_field :image, accept: "image/*" %> <br>
-    場所
+    <label>
+        <i class="fa-solid fa-image"></i>
+        <%= form.file_field :image, accept: "image/*" , class: "input_hidden" %> <br>
+    </label>
+    <%= form.check_box(:image_delete)%>
+    画像を保存しない 
+    <div id= "image_preview">
+        <% if @district.image.attached? %>
+            <%= image_tag @district.image, id: "preview_img", size: "150x150" %>
+        <% end %>
+    </div>
+    場所 <br>
+    <input type="text" id="input_address">
+    <button id="search_address">検索</button>
     <div id="map"></div>
     <%= form.hidden_field :latitude, id: "hidden_latitude" %>
     <%= form.hidden_field :longitude, id: "hidden_longitude" %>
@@ -23,7 +35,7 @@
         dbLat = gon.latitude;
         dbLng = gon.longitude;
         geocoder = new google.maps.Geocoder()
-            map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: dbLat, lng: dbLng},
             zoom: 12,
         });
@@ -40,6 +52,34 @@
             hiddenLat.value = latitude
             hiddenLng.value = longitude
         });
+        let searchBtn = document.getElementById('search_address')
+        searchBtn.addEventListener('click', (e) => {
+            console.log("OK")
+            e.preventDefault()
+            inputStr = document.getElementById('input_address').value
+            geocoder.geocode({'address': inputStr}, function(results, status){
+                if (status == 'OK') {
+                    latitude = results[0].geometry.location.lat()
+                    longitude = results[0].geometry.location.lng()
+                    document.getElementById("hidden_latitude").value = latitude
+                    document.getElementById("hidden_longitude").value = longitude
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: latitude, lng: longitude},
+                    zoom: 12,
+                });
+                marker = new google.maps.Marker({
+                    position: {lat: latitude, lng: longitude},
+                    map: map,
+                    draggable: true,
+                });
+                } else {
+                    alert('該当の住所が見つかりませんでした')
+                }
+            })
+        })
     };
+
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
+<%= javascript_include_tag 'image_preview' %>

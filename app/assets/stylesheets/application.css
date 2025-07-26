@@ -30,3 +30,17 @@ a {
   height: 300px;
   width: 300px;
 }
+
+.imgmaparea {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.input_hidden {
+    display: none;
+}
+
+#map {
+    margin-top: 10px;
+}
