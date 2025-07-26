@@ -1,6 +1,6 @@
 class DistrictsController < ApplicationController
     def index
-        @districts = District.all
+        @districts = District.all.page(params[:page])
     end
 
     def show
@@ -56,11 +56,11 @@ class DistrictsController < ApplicationController
 
     def search
         if params[:category] == "地区名"
-            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%")
+            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%").page(params[:page])
         elsif params[:category] == "年度"
-            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%")
+            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%").page(params[:page])
         else
-            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%")
+            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%").page(params[:page])
         end
     end
 

@@ -16,3 +16,9 @@ ja:
         year: 年度
         price: 金額
         memo: 備考
+  views:
+    pagination:
+      first: '最初のページ'
+      last: '最後のページ'
+      previous: '前のページ'
+      next: '次のページ'
