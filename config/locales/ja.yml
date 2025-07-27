@@ -5,6 +5,8 @@ ja:
         name: 地区名
         year: 年度
         office: 事務所名
+        latitude: 緯度
+        longitude: 経度
       income:
         district_id: 地区名
         year: 年度
