@@ -14,7 +14,7 @@
     <%= form.check_box(:image_delete)%>
     画像を保存しない 
     <div id= "image_preview">
-        <% if @district.image.attached? %>
+        <% if @district.image.attached? && @district.image.attachment.blob.present? && @district.image.attachment.blob.persisted? %>
             <%= image_tag @district.image, id: "preview_img", size: "150x150" %>
         <% end %>
     </div>

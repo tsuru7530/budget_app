@@ -44,7 +44,7 @@ RSpec.describe "Districts", type: :system do
       fill_in('district_name', with: @district.name)
       fill_in('district_year', with: @district.year)
       fill_in('district_office', with: @district.office)
-      attach_file('district[image]', "spec/fixtures/test_image.png")
+      attach_file('district[image]', "spec/fixtures/test_image.png", make_visible: true)
       find('input[name="commit"]').click
       expect(page).to have_content("地区一覧")
       expect(District.count).to eq 1
@@ -56,7 +56,7 @@ RSpec.describe "Districts", type: :system do
       expect(current_path).to eq new_district_path
       fill_in('district_year', with: @district.year)
       fill_in('district_office', with: @district.office)
-      attach_file('district[image]', "spec/fixtures/test_image.png")
+      attach_file('district[image]', "spec/fixtures/test_image.png", make_visible: true)
       find('input[name="commit"]').click
       expect(page).to have_content("新規地区登録")
       expect(District.count).to eq 0
