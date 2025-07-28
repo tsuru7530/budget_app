@@ -6,7 +6,7 @@ RSpec.describe District, type: :model do
       @district = FactoryBot.build(:district)
     end
     context "地区登録ができる" do
-      it "地区名, 年度, 事務所名, 画像が正しく設定されていれば登録できる" do
+      it "地区名, 年度, 事務所名, 画像, 緯度, 経度が正しく設定されていれば登録できる" do
         expect(@district).to be_valid
       end
       it "画像が空でも登録できる" do
@@ -49,6 +49,16 @@ RSpec.describe District, type: :model do
         @district.office = "a" * 51
         @district.valid?
         expect(@district.errors.full_messages).to include("事務所名は50文字以内で入力してください")
+      end
+      it "緯度が空だと登録できない" do
+        @district.latitude = nil
+        @district.valid?
+        expect(@district.errors.full_messages).to include("緯度を入力してください")
+      end
+      it "経度が空だと登録できない" do
+        @district.longitude = nil
+        @district.valid?
+        expect(@district.errors.full_messages).to include("経度を入力してください")
       end
     end
   end
