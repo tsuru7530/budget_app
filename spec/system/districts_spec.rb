@@ -45,6 +45,9 @@ RSpec.describe "Districts", type: :system do
       fill_in('district_year', with: @district.year)
       fill_in('district_office', with: @district.office)
       attach_file('district[image]', "spec/fixtures/test_image.png", make_visible: true)
+      find('#hidden_latitude', visible: false)
+      page.execute_script("document.getElementById('hidden_latitude').value = #{@district.latitude}")
+      page.execute_script("document.getElementById('hidden_longitude').value = #{@district.longitude}")
       find('input[name="commit"]').click
       expect(page).to have_content("地区一覧")
       expect(District.count).to eq 1
