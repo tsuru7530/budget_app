@@ -1,6 +1,6 @@
 databases:
-  - name: budget_app_db
-    databaseName: budget_app_db_ln2k
+  - name: budget_app_db_2
+    databaseName: budget_app_db_2
     user: budget_app
     region: singapore
 
@@ -15,7 +15,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: budget_app_db
+          name: budget_app_db_2
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
