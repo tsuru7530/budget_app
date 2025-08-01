@@ -25,7 +25,12 @@
     <%= form.hidden_field :latitude, id: "hidden_latitude" %>
     <%= form.hidden_field :longitude, id: "hidden_longitude" %>
     <%= form.submit "地区登録" %>
+<% end %><br>
+<%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
 <% end %>
+(戻る)
+
 <script>
     let map
     let marker
