@@ -30,61 +30,6 @@
     <i class="fa-solid fa-left-long"></i>
 <% end %>
 (戻る)
-
-<script>
-    let map
-    let marker
-    let dbLat
-    let dbLng
-    function initMap(){
-        dbLat = gon.latitude;
-        dbLng = gon.longitude;
-        geocoder = new google.maps.Geocoder()
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: dbLat, lng: dbLng},
-            zoom: 12,
-        });
-        marker = new google.maps.Marker({
-            position: {lat: dbLat, lng: dbLng},
-            map: map,
-            draggable: true,
-        });
-        google.maps.event.addListener(marker, 'dragend', function(e){
-            let hiddenLat = document.getElementById("hidden_latitude")
-            let hiddenLng = document.getElementById("hidden_longitude")
-            let latitude = e.latLng.lat()
-            let longitude = e.latLng.lng()
-            hiddenLat.value = latitude
-            hiddenLng.value = longitude
-        });
-        let searchBtn = document.getElementById('search_address')
-        searchBtn.addEventListener('click', (e) => {
-            console.log("OK")
-            e.preventDefault()
-            inputStr = document.getElementById('input_address').value
-            geocoder.geocode({'address': inputStr}, function(results, status){
-                if (status == 'OK') {
-                    latitude = results[0].geometry.location.lat()
-                    longitude = results[0].geometry.location.lng()
-                    document.getElementById("hidden_latitude").value = latitude
-                    document.getElementById("hidden_longitude").value = longitude
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: latitude, lng: longitude},
-                    zoom: 12,
-                });
-                marker = new google.maps.Marker({
-                    position: {lat: latitude, lng: longitude},
-                    map: map,
-                    draggable: true,
-                });
-                } else {
-                    alert('該当の住所が見つかりませんでした')
-                }
-            })
-        })
-    };
-
-
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
 <%= javascript_include_tag 'image_preview' %>
+<%= javascript_include_tag 'map_form' %>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
