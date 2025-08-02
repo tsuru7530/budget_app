@@ -1,4 +1,4 @@
-<h1>予算執行情報編集/h1>
+<h1>予算執行情報編集</h1>
 <%= form_with model: @outgo, url: income_outgo_path , local: true do |form| %>
     <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
     <%= form.hidden_field :income_id, value: @income.id %> <br>
@@ -9,4 +9,8 @@
     備考 <br>
     <%= form.text_field :memo %> <br>
     <%= form.submit "登録" %>
+<% end %><br>
+<%= link_to income_path(@income) do %>
+    <i class="fa-solid fa-left-long"></i>
 <% end %>
+(戻る)
