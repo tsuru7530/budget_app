@@ -29,6 +29,13 @@ a {
 #map {
   height: 300px;
   width: 300px;
+  margin: 10px 0px;
+}
+
+#map_index {
+    height: 300px;
+    width: 500px;
+    margin: 10px 0px;
 }
 
 .imgmaparea {
@@ -39,8 +46,4 @@ a {
 
 .input_hidden {
     display: none;
-}
-
-#map {
-    margin-top: 10px;
 }
