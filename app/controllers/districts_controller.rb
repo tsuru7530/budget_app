@@ -1,6 +1,7 @@
 class DistrictsController < ApplicationController
     def index
         @districts = District.all.page(params[:page])
+        gon.districts = @districts
     end
 
     def show
