@@ -3,6 +3,9 @@ var marker
 var dbLat
 var dbLng
 function initMap(){
+    if(!gon.latitude){
+        window.location.reload()
+    }
     dbLat = gon.latitude;
     dbLng = gon.longitude;
     geocoder = new google.maps.Geocoder()
