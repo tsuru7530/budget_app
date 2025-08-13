@@ -1,11 +1,12 @@
 class OutgoesController < ApplicationController
+    before_action :set_outgo, only:[:edit, :update, :destroy]
+    before_action :set_income, only:[:new, :create, :edit, :update]
+    
     def new
-        @income = Income.find(params[:income_id])
         @outgo = Outgo.new
     end
 
     def create
-        @income = Income.find(params[:income_id])
         @outgo = Outgo.new(outgo_params)
         if @outgo.save
             redirect_to income_path(@income)
@@ -15,13 +16,9 @@ class OutgoesController < ApplicationController
     end
 
     def edit
-        @income = Income.find(params[:income_id])
-        @outgo = Outgo.find(params[:id])
     end
 
     def update
-        @income = Income.find(params[:income_id])
-        @outgo = Outgo.find(params[:id])
         if @outgo.update(outgo_params)
             redirect_to income_path(@income)
         else
@@ -30,7 +27,6 @@ class OutgoesController < ApplicationController
     end
 
     def destroy
-        @outgo = Outgo.find(params[:id])
         income= @outgo.income
         @outgo.destroy
         redirect_to income_path(income)
@@ -39,5 +35,13 @@ class OutgoesController < ApplicationController
     private
     def outgo_params
         params.require(:outgo).permit(:income_id, :year, :price, :memo)
+    end
+
+    def set_income
+        @income = Income.find(params[:income_id])
+    end
+
+    def set_outgo
+        @outgo = Outgo.find(params[:id])
     end
 end
