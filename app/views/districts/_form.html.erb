@@ -1,15 +1,15 @@
 <%= form_with model: model do |form| %>
     <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
     地区名 <br>
-    <%= form.text_field :name %> <br>
+    <%= form.text_field :name, class: "form-controll"%> <br>
     年度 <br>
-    <%= form.text_field :year %> <br>
+    <%= form.text_field :year, class: "form-controll" %> <br>
     事務所名 <br>
-    <%= form.text_field :office %> <br>
+    <%= form.text_field :office, class: "form-controll" %> <br>
     画像 <br>
     <label>
         <i class="fa-solid fa-image"></i>
-        <%= form.file_field :image, accept: "image/*" , class: "input_hidden" %> <br>
+        <%= form.file_field :image, accept: "image/*" , class: "d-none" %> <br>
     </label>
     <%= form.check_box(:image_delete)%>
     画像を保存しない 
@@ -19,12 +19,12 @@
         <% end %>
     </div>
     場所 <br>
-    <input type="text" id="input_address">
-    <button id="search_address">検索</button>
-    <div id="map"></div>
+    <input type="text" id="input_address", class: "form-controll">
+    <button id="search_address", class="btn btn-primary">検索</button>
+    <div id="map"></div><br>
     <%= form.hidden_field :latitude, id: "hidden_latitude" %>
     <%= form.hidden_field :longitude, id: "hidden_longitude" %>
-    <%= form.submit "地区登録" %>
+    <%= form.submit "地区登録", class:"btn btn-primary" %>
 <% end %><br>
 <%= link_to root_path do %>
     <i class="fa-solid fa-left-long"></i>

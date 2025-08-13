@@ -3,8 +3,8 @@
     (地区検索)
     <%= form_with url: search_path, method: :get do |form| %>
         <%= form.select :category, ["地区名", "年度", "事務所名"] %>
-        <%= form.text_field :inputword %>
-        <%= button_tag type: "submit" do %>
+        <%= form.text_field :inputword, class: "form-controll" %>
+        <%= button_tag type: "submit", class: "btn btn-primary" do %>
             <i class="fa-solid fa-magnifying-glass"></i>
         <% end %>
     <% end %>

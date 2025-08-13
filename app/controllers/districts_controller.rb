@@ -1,7 +1,7 @@
 class DistrictsController < ApplicationController
     before_action :set_district, only:[:show, :edit, :update, :destroy]
     def index
-        @districts = District.all.page(params[:page])
+        @districts = District.all.page(params[:page]).per(10)
         gon.districts = @districts
     end
 
@@ -54,11 +54,11 @@ class DistrictsController < ApplicationController
 
     def search
         if params[:category] == "地区名"
-            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%").page(params[:page])
+            @districts = District.where("name LIKE ?", "%#{params[:inputword]}%").page(params[:page]).per(10)
         elsif params[:category] == "年度"
-            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%").page(params[:page])
+            @districts = District.where("year LIKE ?", "%#{params[:inputword]}%").page(params[:page]).per(10)
         else
-            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%").page(params[:page])
+            @districts = District.where("office LIKE ?", "%#{params[:inputword]}%").page(params[:page]).per(10)
         end
     end
 
