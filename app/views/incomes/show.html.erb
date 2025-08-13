@@ -15,7 +15,7 @@
 (予算執行情報登録)
 <br>
 <br>
-<table>
+<table class= "table table-bordered w-auto text-center">
     <tr>
         <th></th>
         <th>年度</th>
@@ -28,7 +28,7 @@
         <td colspan = "2"></td>
     </tr>
     <tr>
-        <td>予算額</td>
+        <td class="text-start">予算額</td>
         <td></td>
         <td></td>
         <td></td>
@@ -40,7 +40,7 @@
         <td></td>
         <td>R<%= @income.year %></td>
         <td><%= @income.category %></td>
-        <td class="tdright"><%= @income.price.to_fs(:delimited) %></td>
+        <td class="text-end"><%= @income.price.to_fs(:delimited) %></td>
         <td><%= @income.memo %></td>
         <td>
             <%= link_to edit_income_path(@income) do %>
@@ -51,7 +51,7 @@
     </tr>
     <% if @outgoes.present? %>
         <tr>
-            <td>執行額</td>
+            <td class"text-start">執行額</td>
             <td></td>
             <td></td>
             <td></td>
@@ -65,7 +65,7 @@
             <td></td>
             <td>R<%= outgo.year %></td>
             <td></td>
-            <td class="tdright"><%= outgo.price.to_fs(:delimited) %></td>
+            <td class="text-end"><%= outgo.price.to_fs(:delimited) %></td>
             <td><%= outgo.memo %></td>
             <td>
                 <%= link_to edit_income_outgo_path(@income.id, outgo.id) do %>
@@ -80,7 +80,7 @@
         </tr>        
     <% end %>
     <tr>
-        <td>残額</td>
+        <td class="text-start">残額</td>
         <td></td>
         <td></td>
         <td></td>
@@ -92,7 +92,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td class="tdright"><%= @total.to_fs(:delimited) %></td>
+        <td class="text-end"><%= @total.to_fs(:delimited) %></td>
         <td></td>
         <td></td>
         <td></td>

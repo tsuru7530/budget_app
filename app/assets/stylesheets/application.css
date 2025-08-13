@@ -8,3 +8,11 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ a {
+  text-decoration: none;
+ }
+
+ .fa-solid.fa-trash {
+  color: red;
+ }

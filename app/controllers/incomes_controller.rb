@@ -1,10 +1,11 @@
 class IncomesController < ApplicationController
+    before_action :set_income, only:[:show, :edit, :update, :destroy]
+    
     def new
         @income = Income.new
     end
 
     def show
-        @income = Income.find(params[:id])
         @outgoes = @income.outgoes
         @total = @income.price
         @outgoes.each do |outgo|
@@ -23,11 +24,9 @@ class IncomesController < ApplicationController
     end
 
     def edit
-        @income = Income.find(params[:id])
     end
 
     def update
-        @income = Income.find(params[:id])
         if @income.update(income_params)
             redirect_to income_path(@income)
         else
@@ -36,7 +35,6 @@ class IncomesController < ApplicationController
     end
 
     def destroy
-        @income = Income.find(params[:id])
         district = @income.district
         @income.destroy
         redirect_to district_path(district)
@@ -45,5 +43,9 @@ class IncomesController < ApplicationController
     private
     def income_params
         params.require(:income).permit(:district_id, :year, :category, :price, :memo)
+    end
+
+    def set_income
+        @income = Income.find(params[:id])
     end
 end

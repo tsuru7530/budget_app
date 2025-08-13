@@ -1,14 +1,11 @@
-<%= form_with model: model do |form| %>
+<%= form_with model: outgo, url: path , local: true do |form| %>
     <%= render partial: "/layouts/error_messages", locals:{model: form.object} %>
-    地区名 <br>
-    <%= form.collection_select :district_id, District.all, :id, :name, include_blank: "選択してください" %> <br>
+    <%= form.hidden_field :income_id, value: @income.id %> <br>
     年度 <br>
     <%= form.text_field :year, class: "form-controll" %> <br>
-    予算種別 <br>
-    <%= form.select :category, ["当初","補正"] %> <br>
     金額 <br>
     <%= form.text_field :price, class: "form-controll" %> <br>
     備考 <br>
     <%= form.text_field :memo, class: "form-controll" %> <br><br>
     <%= form.submit "登録", class: "btn btn-primary" %>
-<% end %>
+<% end %><br>

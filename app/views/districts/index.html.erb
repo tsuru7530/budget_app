@@ -3,8 +3,8 @@
     (地区検索)
     <%= form_with url: search_path, method: :get do |form| %>
         <%= form.select :category, ["地区名", "年度", "事務所名"] %>
-        <%= form.text_field :inputword %>
-        <%= button_tag type: "submit" do %>
+        <%= form.text_field :inputword, class: "form-controll" %>
+        <%= button_tag type: "submit", class: "btn btn-primary" do %>
             <i class="fa-solid fa-magnifying-glass"></i>
         <% end %>
     <% end %>
@@ -14,47 +14,7 @@
     <i class="fa-solid fa-plus"></i>
 <% end %> 
 (地区登録)<br><br>
-
 <div id="map_index"></div>
-
-<table>
-    <% if @districts.present? %>
-        <tr>
-            <th>地区名</th>
-            <th>年度</th>
-            <th>事務所名</th>
-            <th colspan = "3"></th>
-        </tr>
-    <% end %>
-    <% @districts.each do |district| %>
-        <tr>
-            <td>
-                <%= district.name %>
-            </td>
-            <td>
-                R<%= district.year %>
-            </td>
-            <td>
-                <%= district.office %>
-            </td>
-            <td>
-                <%= link_to district_path(district) do %>
-                    <i class="fa-solid fa-circle-info"></i>        
-                <% end %>
-            </td>
-            <td>
-                <%= link_to edit_district_path(district) do %>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                <% end %>
-            </td>
-            <td>
-                <%= link_to district_path(district), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか?"} do %>
-                    <i class="fa-solid fa-trash"></i>
-                <% end %>
-            </td>
-        </tr>
-    <% end %>
-</table>
-<%= paginate @districts %>
+<%= render partial: 'list', locals: {districts: @districts} %>
 <%= javascript_include_tag 'map_index' %>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
