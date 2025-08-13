@@ -1,11 +1,11 @@
 class DistrictsController < ApplicationController
+    before_action :set_district, only:[:show, :edit, :update, :destroy]
     def index
         @districts = District.all.page(params[:page])
         gon.districts = @districts
     end
 
     def show
-        @district = District.find(params[:id])
         gon.latitude = @district.latitude
         gon.longitude = @district.longitude
         @incomes = @district.incomes
@@ -32,13 +32,11 @@ class DistrictsController < ApplicationController
     end
 
     def edit
-        @district = District.find(params[:id])
         gon.latitude = @district.latitude
         gon.longitude = @district.longitude
     end
 
     def update
-        @district = District.find(params[:id])
         if @district.image_delete == 1
             @district.image.purge unless @district.image.nil?
         end
@@ -50,7 +48,6 @@ class DistrictsController < ApplicationController
     end
 
     def destroy
-        @district = District.find(params[:id])
         @district.destroy
         redirect_to root_path
     end
@@ -68,5 +65,9 @@ class DistrictsController < ApplicationController
     private
     def district_params
         params.require(:district).permit(:name, :year, :office, :image, :image_delete, :latitude, :longitude)
+    end
+
+    def set_district
+        @district = District.find(params[:id])
     end
 end
