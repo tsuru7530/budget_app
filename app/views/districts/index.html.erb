@@ -16,5 +16,7 @@
 (地区登録)<br><br>
 <div id="map_index"></div>
 <%= render partial: 'list', locals: {districts: @districts} %>
+<div id="map_area" style='width:500px;height:500px;' data-api-key="<%= ENV['GOOGLE_API_KEY'] %>"></div>
 <%= javascript_include_tag 'map_index' %>
+<%= javascript_pack_tag 'application' %>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
