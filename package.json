@@ -6,6 +6,7 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.28.3",
     "@googlemaps/react-wrapper": "^1.2.0",
+    "@react-google-maps/api": "^2.20.7",
     "@types/babel__core": "^7.20.5",
     "@types/webpack": "^5.28.5",
     "babel-loader": "^8.4.1",

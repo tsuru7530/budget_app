@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper";
 
-const apiKey = 'AIzaSyDzBItEXF35b3DW-L4vdsiwZEnhTj1esx4'
-
 function MyMap() {
   const ref = useRef(null);
   const [map, setMap] = useState();
